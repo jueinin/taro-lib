@@ -1,0 +1,41 @@
+.book-item {
+  height: 260px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  .img {
+    height: 100%;
+    flex-basis: 200px;
+  }
+  .img image {
+    height: 260px;
+    width: 400px;
+  }
+  .right {
+    flex-grow: 1;
+    margin-left: 36px;
+    border-bottom: 2px solid #DCDCDC;
+  }
+  .title {
+    font-size: 30px;
+    font-weight: bold;
+  }
+  .author {
+    font-size: 24px;
+    color: #8e8e8e;
+    margin-top: 16px;
+  }
+  .comments {
+    font-size: 24px;
+    color: #8e8e8e;
+  }
+  .price {
+    font-size: 40px;
+    color: red;
+    font-weight: bold;
+    padding: 16px 0;
+  }
+  .person {
+    margin-left: 20px;
+  }
+}

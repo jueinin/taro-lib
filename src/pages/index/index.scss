@@ -1,0 +1,41 @@
+.index {
+  .search-bar1 {
+    margin-bottom: 8px;
+  }
+  .top-swiper {
+    width: 750px;
+    height: 240px;
+  }
+
+  .swiper {
+    height: 100%;
+    width: 100%;
+  }
+
+  .container {
+    padding: 16px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .classifications {
+    padding-top: 30px;
+  }
+
+  .swiper-item {
+    width: unset;
+    height: unset;
+    display: unset;
+    overflow: unset;
+  }
+
+  .for-you {
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}

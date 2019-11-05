@@ -1,0 +1,22 @@
+.search-vv {
+  flex-grow: 1;
+  min-width: 550px;
+}
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  position: relative;
+}
+.button {
+  border: none;
+}
+.candidate {
+  position: absolute;
+  background: white;
+  width: 100%;
+}
+.container {
+  position: relative;
+}
