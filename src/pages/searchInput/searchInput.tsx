@@ -10,8 +10,7 @@ import {BaseEventOrig, CommonEventFunction} from "@tarojs/components/types/commo
 import classNames from "classnames";
 // import SearchCandidateList from "../../common/components/SearchCandidateList/SearchCandidateList";
 import SearchBarWithTips from "../../composeComponents/SearchBarWithTips/SearchBarWithTips";
-import {debounce} from "lodash-es";
-
+import debounce from 'lodash/debounce';
 const partUrl = "/pages/searchDetail/searchDetail?keyword=";
 @observer
 class SearchInput extends Component<{},any> {
@@ -51,17 +50,21 @@ class SearchInput extends Component<{},any> {
     })
   }
   onRequestSearchTip = debounce((title: string) => {
+    if (title === "") {
+      this.candidateList = [];
+      return; // 防止异步造成candilist一直不为空
+    }
     Taro.request({
       url: `${mockPrefix}/searchTips?title=${title}`,
       success: res => {
         this.candidateList = res.data;
       }
-    })
-  },500);
+    });
+  },500)
   onSearchStringChange:CommonEventFunction<{ value: string, }>=(e)=>{
     this.searchString = e.detail.value;
-    // 防抖进行查询后台
     this.onRequestSearchTip(e.detail.value);
+
   }
   onSearchListClick=(title:string)=>{
     console.log(title)
