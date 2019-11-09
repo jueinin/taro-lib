@@ -51,7 +51,7 @@ export type FilterTabProps={
 }
 export type SearchCandidateItem={
   title: string;
-  resultCount: number;
+  subTitle?: string
 }
 export type SearchCandidateListProps={
   list: SearchCandidateItem[];

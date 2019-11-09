@@ -12,9 +12,6 @@
 .grey {
   color: #8e8e8e;
 }
-.page {
-  padding: 16rpx;
-}
 .small-item {
   background: #DCDCDC;
   display: inline-flex;
@@ -24,5 +21,10 @@
   margin-right: 20px;
   font-size: 23 rpx;
 }
-
+.transparent-button {
+  background: none;
+}
+.transparent-button:after {
+  border: none;
+}
 // 颜色表在此 http://xh.5156edu.com/page/z1015m9220j18754.html

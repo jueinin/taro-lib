@@ -2,24 +2,36 @@ import Taro, {Component} from '@tarojs/taro'
 import {Button, View} from "@tarojs/components";
 import {FilterTabProps, FilterTabType} from "../../types";
 import './FilterTab.scss'
+import classNames from "classnames";
+
+function decidePriceStatus(currentTab: FilterTabType) {
+  if ((currentTab !== FilterTabType.价格升序 && currentTab !== FilterTabType.价格降序) || currentTab === FilterTabType.价格降序) {
+    return FilterTabType.价格升序;
+  } else {
+    return FilterTabType.价格降序
+  }
+}
 class FilterTab extends Component<FilterTabProps>{  // 带有顶部筛选
   static defaultProps={
-    currentTab: FilterTabType.默认
+    currentTab: FilterTabType.默认,
+    onChange: _tab => {}
   }
+  static options={
+    addGlobalClass: true
+  }
+  static externalClasses = ['outer-class'];
   render(): any {
     let {currentTab,onChange} = this.props;
-    let priceClass = "";
-    if (currentTab === FilterTabType.价格升序) {
-      priceClass = "price-top";
-    }else if (currentTab === FilterTabType.价格降序) {
-      priceClass = "price-down";
-    }
-    return <View>
-      <Button className={'btn '+currentTab===FilterTabType.默认?'active':""}>默认</Button>
-      <Button className={'btn '+currentTab===FilterTabType.销量?'active':""}>销量</Button>
-      <Button className={'btn '+priceClass}>价格</Button>
-      <Button className={'btn '+currentTab===FilterTabType.好评?'active':""}>好评</Button>
-      <Button className={'btn '+currentTab===FilterTabType.出版时间?'active':""}>出版时间</Button>
+    return <View className={'outer-class container'}>
+      <Button onClick={()=>onChange(FilterTabType.默认)} className={classNames('transparent-button',{active: currentTab===FilterTabType.默认})}>默认</Button>
+      <Button onClick={()=>onChange(FilterTabType.销量)} className={classNames('transparent-button',{active: currentTab===FilterTabType.销量})}>销量</Button>
+      <Button onClick={()=>onChange(decidePriceStatus(currentTab))} className={classNames('transparent-button',{
+        active: currentTab===FilterTabType.价格降序 || currentTab===FilterTabType.价格升序,
+        "price-down": currentTab === FilterTabType.价格降序,
+        "price-top": currentTab===FilterTabType.价格升序
+      })}>价格</Button>
+      <Button onClick={()=>onChange(FilterTabType.好评)} className={classNames('transparent-button',{active: currentTab===FilterTabType.好评})}>好评</Button>
+      <Button onClick={()=>onChange(FilterTabType.出版时间)} className={classNames('transparent-button',{active: currentTab===FilterTabType.出版时间})}>出版时间</Button>
     </View>;
   }
 }

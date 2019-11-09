@@ -87,7 +87,6 @@ class Index extends Component<any,IndexState> {
     Taro.request({
       url: `${mockPrefix}/recommends`,
       success: res => {
-        console.log(res);
         this.setState({
           books: this.state.books.concat(res.data)
         })

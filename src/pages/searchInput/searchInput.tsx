@@ -11,6 +11,7 @@ import classNames from "classnames";
 // import SearchCandidateList from "../../common/components/SearchCandidateList/SearchCandidateList";
 import SearchBarWithTips from "../../composeComponents/SearchBarWithTips/SearchBarWithTips";
 import debounce from 'lodash/debounce';
+import {searchTips} from "../../common/interceptor";
 const partUrl = "/pages/searchDetail/searchDetail?keyword=";
 @observer
 class SearchInput extends Component<{},any> {
@@ -39,11 +40,9 @@ class SearchInput extends Component<{},any> {
     Taro.navigateTo({
       url: url,
       success: () => {
-        // 把历史记录存起来
-        console.log(title,"title")
         if (title && save) {
           let arr = Taro.getStorageSync(storage.keywords) || [];
-          arr.push(title);
+          arr.unshift(title);
           Taro.setStorageSync(storage.keywords, arr);
         }
       }
@@ -54,12 +53,12 @@ class SearchInput extends Component<{},any> {
       this.candidateList = [];
       return; // 防止异步造成candilist一直不为空
     }
+    Taro.addInterceptor(searchTips);
     Taro.request({
       url: `${mockPrefix}/searchTips?title=${title}`,
-      success: res => {
-        this.candidateList = res.data;
-      }
-    });
+    }).then(res => {
+      this.candidateList = res.data;
+    })
   },500)
   onSearchStringChange:CommonEventFunction<{ value: string, }>=(e)=>{
     this.searchString = e.detail.value;
@@ -67,17 +66,17 @@ class SearchInput extends Component<{},any> {
 
   }
   onSearchListClick=(title:string)=>{
-    console.log(title)
+    this.navigateTo(partUrl + title, title);
   }
   componentDidMount(): void {
     this.getHotSearch();
-    this.recentSearch = Taro.getStorageSync(storage.keywords) || [];
+    this.recentSearch = (Taro.getStorageSync(storage.keywords) as Array<any> || []).slice(0,10);
   }
 
   render() {
     let emptyString = this.searchString.length === 0;
     return (
-      <View className={'search-input page'}>
+      <View className={'search-input'}>
         <SearchBarWithTips searchCandidateProps={{
           list: this.candidateList,
           onClick: this.onSearchListClick

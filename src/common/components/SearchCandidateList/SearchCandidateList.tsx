@@ -16,7 +16,7 @@ class SearchCandidateList extends Component<SearchCandidateListProps>{
        {list.map((value, _index) => {
          return <View className={'item'} onClick={()=>onClick(value.title)}>
            <Text className={'left'}>{value.title}</Text>
-           <Text className={'right'}>{value.resultCount}</Text>
+           <Text className={'right'}>{value.subTitle}</Text>
          </View>
        })}
      </View>
