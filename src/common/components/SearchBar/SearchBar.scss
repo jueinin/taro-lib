@@ -1,13 +1,14 @@
+@import "../../style/varibles";
 .search-bar {
   border-radius: 16px;
   height: 66px;
-  background: #F5F5F5;
+  background: $gray-200;
   display: flex;
   flex-direction: row;
   padding: 0 16px;
   align-items: center;
   .holder {
-    color: #8e8e9e;
+    color: $gray-600;
     font-size: 26px;
   }
   .search-icon {

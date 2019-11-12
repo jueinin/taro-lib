@@ -1,5 +1,6 @@
+@import "../../style/varibles";
 .item {
-  border-bottom: 2px solid #DCDCDC;
+  border-bottom: 2px solid $gray-300;
   padding: 20px;
   display: flex;
   flex-direction: row;
@@ -10,6 +11,6 @@
 }
 .right {
   margin-left: auto;
-  color: #8e8e8e;
+  color: $gray-400;
   font-size: 24px;
 }

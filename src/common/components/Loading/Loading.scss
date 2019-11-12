@@ -1,0 +1,63 @@
+@import "../../style/varibles";
+.container {
+  position: relative;
+  .spin-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    .spin {
+      display: inline-block;
+      position: relative;
+      animation: spin 1s infinite linear;
+
+      .dot {
+        height: 18px;
+        width: 18px;
+        position: absolute;
+        opacity: 0.3;
+        background: $primary;
+        border-radius: 100%;
+        transform: scale(0.75); // 还能通过这种缩小的方法获得间距
+        transform-origin: 50%, 50%;
+        animation: opacticys 1s infinite linear alternate;
+
+        &:nth-child(1) {
+          top: 0;
+          left: 0;
+        }
+
+        &:nth-child(2) {
+          top: 0;
+          right: 0;
+          animation-delay: 0.4s;
+        }
+
+        &:nth-child(3) {
+          right: 0;
+          bottom: 0;
+          animation-delay: 0.8s;
+        }
+
+        &:nth-child(4) {
+          bottom: 0;
+          left: 0;
+          animation-delay: 1.2s;
+        }
+      }
+    }
+  }
+}
+.spining {
+  background: $gray-300;
+}
+@keyframes spin {
+  to {
+    transform: rotate(450deg);
+  }
+}
+@keyframes opacticys {
+  to {
+    opacity: 1;
+  }
+}

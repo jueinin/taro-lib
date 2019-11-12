@@ -40,8 +40,8 @@ export  type SearchItem = string;
 export enum FilterTabType{
   默认,
   销量,
-  价格升序,
-  价格降序,
+  价格升序,  // 从高到低
+  价格降序, // 价格从低到高
   好评,
   出版时间
 }
@@ -65,4 +65,8 @@ export type SearchBarWithTipsProps={
     onClick: (title: string) => any
   };
   "button-class"?: string;
+}
+export type SpinProps={
+  spining?: boolean;
+  tips?: string;
 }

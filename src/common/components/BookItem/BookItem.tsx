@@ -4,9 +4,6 @@ import {Image, Text, View} from "@tarojs/components";
 import {BookItemProps} from "../../types";
 import './BookItem.scss'
 class BookItem extends Component<BookItemProps> {
-  static options={
-    addGlobalClass: true
-  }
   static defaultProps = {
     price: 0,
     imgUrl: "",

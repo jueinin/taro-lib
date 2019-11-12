@@ -32,7 +32,8 @@ class App extends Component {
       "pages/forum/forum",
       "pages/classificationDetail/classificationDetail",
       "pages/searchInput/searchInput",
-      "pages/searchDetail/searchDetail"
+      "pages/searchDetail/searchDetail",
+      "pages/test/test"
     ],
     window: {
       backgroundTextStyle: 'light',

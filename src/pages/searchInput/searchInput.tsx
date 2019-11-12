@@ -19,9 +19,6 @@ class SearchInput extends Component<{},any> {
   @observable recentSearch: SearchItem[] = [];
   @observable searchString = "";
   @observable candidateList: SearchCandidateItem[] = [];
-  static options={
-    addGlobalClass: true
-  }
   cancel = () => {
     Taro.navigateBack();
   };
@@ -59,7 +56,7 @@ class SearchInput extends Component<{},any> {
     }).then(res => {
       this.candidateList = res.data;
     })
-  },500)
+  }, 500);
   onSearchStringChange:CommonEventFunction<{ value: string, }>=(e)=>{
     this.searchString = e.detail.value;
     this.onRequestSearchTip(e.detail.value);
@@ -71,6 +68,7 @@ class SearchInput extends Component<{},any> {
   componentDidMount(): void {
     this.getHotSearch();
     this.recentSearch = (Taro.getStorageSync(storage.keywords) as Array<any> || []).slice(0,10);
+    this.searchString = this.$router.params.keyword || "";
   }
 
   render() {

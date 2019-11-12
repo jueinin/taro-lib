@@ -1,3 +1,5 @@
+@import "../../style/varibles";
+@import "../../style/custom";
 .book-item {
   height: 260px;
   display: flex;
@@ -14,7 +16,7 @@
   .right {
     flex-grow: 1;
     margin-left: 36px;
-    border-bottom: 2px solid #DCDCDC;
+    border-bottom: 2px solid $gray-300;
   }
   .title {
     font-size: 30px;
@@ -22,16 +24,16 @@
   }
   .author {
     font-size: 24px;
-    color: #8e8e8e;
+    color: $gray-600;
     margin-top: 16px;
   }
   .comments {
     font-size: 24px;
-    color: #8e8e8e;
+    color: $gray-600;
   }
   .price {
     font-size: 40px;
-    color: red;
+    color: $red;
     font-weight: bold;
     padding: 16px 0;
   }

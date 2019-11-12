@@ -1,9 +1,11 @@
+@import "../../common/style/varibles";
+
 .search-input {
   box-sizing: border-box;
   padding: 16px;
 }
 .item {
-  background: #DCDCDC;
+  background: $gray-400;
   display: inline-flex;
   justify-content: center;
   align-items: center;

@@ -1,0 +1,70 @@
+{
+  "type": "object",
+  "properties": {
+    "bookData": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "imgUrl": {
+            "type": "string",
+            "enum": [
+              "https://jueinin.oss-cn-hongkong.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F/swiper-image2.jpg"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "enum": [
+              "给大忙人的高效阅读",
+              "给大忙人的高效阅读给大忙人的高效阅读给大忙人的高效阅读给大忙人的高效阅读给大忙人的高效阅读给大忙人的高效阅读"
+            ]
+          },
+          "author": {
+            "type": "string",
+            "enum": [
+              "李乐乐"
+            ]
+          },
+          "price": {
+            "type": "number",
+            "minimum": 28,
+            "maximum": 33.3,
+            "exclusiveMinimum": true,
+            "exclusiveMaximum": true
+          },
+          "comments": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 30
+          },
+          "goodComments": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 6,
+            "exclusiveMinimum": true,
+            "exclusiveMaximum": true
+          },
+          "bookId": {
+            "type": "string",
+            "maxLength": 8
+          }
+        },
+        "required": [
+          "imgUrl",
+          "title",
+          "author",
+          "price",
+          "comments",
+          "goodComments",
+          "bookId"
+        ]
+      },
+      "minItems": 5
+    },
+    "maxPage": {
+      "type": {
+        
+      }
+    }
+  }
+}
