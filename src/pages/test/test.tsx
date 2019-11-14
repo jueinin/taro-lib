@@ -1,12 +1,13 @@
 import Taro, {Component} from '@tarojs/taro'
-import {View} from "@tarojs/components";
-import Loading from "../../common/components/Loading/Loading";
+import {Text, View} from "@tarojs/components";
 import './test.scss'
 class Test extends Component{
   render(): any {
-    return <Loading spining={false}>
-      <View className={'dd'}>dddd</View>
-    </Loading>;
+    return <View className={'ellipsis box'}>
+      iiiiiiiii iiiiiiiiiii iiiiiiiiiiiii iiiiiiiiiiiiiiiiiiii iiiiiiiiiiiiiiiiiii iiiiiiii iiiii iiiiiiiiiiiiiiiiiii
+      iiiiiiiii iiiiiiiiiii iiiiiiiiiiiii iiiiiiiiiiiiiiiiiiii iiiiiiiiiiiiiiiiiii iiiiiiii iiiii iiiiiiiiiiiiiiiiiii
+      <Text className={'icon'}>全部展示</Text>
+    </View>;
   }
 }
 

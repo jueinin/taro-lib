@@ -1,0 +1,14 @@
+@import "../../common/style/custom";
+@import "../../common/style/varibles";
+.top-nav-bar {
+  background: $gray-100;
+  display: flex;
+  justify-content: space-around;
+  width: 750rpx;
+}
+.hidden {
+  display: none;
+}
+.active {
+  color: red;
+}

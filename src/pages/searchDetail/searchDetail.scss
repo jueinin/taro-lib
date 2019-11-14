@@ -1,0 +1,13 @@
+@import "../../common/style/varibles";
+.book-list-container {
+  position: relative;
+  .page-hint {
+    background: $gray-600;
+    color: #ffffff;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.7;
+    position: fixed;
+  }
+}

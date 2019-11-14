@@ -70,3 +70,48 @@ export type SpinProps={
   spining?: boolean;
   tips?: string;
 }
+export type BookSearchType= {
+  bookData: BookListProps;
+  maxPage:number
+}
+export enum BookDetailTabType  {
+  商品,
+  详情,
+  评论,
+  相关
+}
+
+export type CommentPreview = {
+  comments: number;
+  goodComments: number;
+  tags: {
+    title: string;
+    amount: number;
+  }[],
+  commentList: {
+    commentText: string;
+    commentImg: string[];
+    avatar: string;
+    name: string;
+  }[]
+}
+export type BookDetailItemProps = {
+  images: string[],
+  price: number;
+  title: string;
+  description: string;
+  author: string;
+  publisher: string;
+  AdGoods: BookItemProps[];
+  comment: CommentPreview;
+}
+export type ProductInfo = {  // 目前是一样的, 后续上面的估计会加props,所以拆开了
+  images: string[],
+  price: number;
+  title: string;
+  description: string;
+  author: string;
+  publisher: string;
+  AdGoods: BookItemProps[];
+  comment: CommentPreview;
+}

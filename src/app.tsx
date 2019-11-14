@@ -33,6 +33,7 @@ class App extends Component {
       "pages/classificationDetail/classificationDetail",
       "pages/searchInput/searchInput",
       "pages/searchDetail/searchDetail",
+      "pages/bookDetail/bookDetail",
       "pages/test/test"
     ],
     window: {

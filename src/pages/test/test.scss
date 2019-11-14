@@ -1,7 +1,10 @@
-.dd {
-  display: flex;
-  height: 750px;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+@import "../../common/style/custom";
+
+.box {
+  position: relative;
+}
+.icon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }

@@ -1,0 +1,24 @@
+@import "../../../../common/style/varibles";
+@import "../../../../common/style/custom";
+.swiper-img {
+  width: 750px;
+}
+.swiper {
+  height: 800px;
+}
+.price {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bolder;
+  color: red;
+}
+.title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bolder;
+  margin-top: 25px;
+}
+.description {
+  font-size: 0.9rem;
+  margin-top: 20px;
+  color: $gray-600;
+  @extend .ellipsis
+}

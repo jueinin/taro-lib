@@ -1,7 +1,7 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View} from "@tarojs/components";
 import SortTab from "../../common/components/SortTab/SortTab";
-import {BookListProps, FilterTabType} from "../../common/types";
+import {BookListProps, BookSearchType, FilterTabType} from "../../common/types";
 import './searchDetail.scss';
 import SearchBar from "../../common/components/SearchBar/SearchBar";
 import {observer} from "@tarojs/mobx";
@@ -16,14 +16,18 @@ class SearchDetail extends Component{
   @observable bookList: BookListProps = [];
   @observable currentPage: number = 1;
   reachToMaxPage: boolean = false;
-  reaction = reaction(() => this.currentTab, () => this.reachToMaxPage = false);
+  @observable maxPage:number|string="";
+  reaction = reaction(() => this.currentTab, () => { // 切换tab后重置这几个数据
+    this.reachToMaxPage = false;
+    this.currentPage = 1;
+    this.maxPage = "";
+  });
   componentDidMount(): void {
     this.searchString = this.$router.params.keyword;
     this.onRequestBookList(this.searchString, this.currentTab,this.currentPage);
   }
 
   navigateToSearchInputPage = () => {
-    // Taro.navigateBack();
     Taro.navigateTo({
       url: "/pages/searchInput/searchInput?keyword=" + this.searchString
     })
@@ -37,15 +41,24 @@ class SearchDetail extends Component{
     Taro.showLoading({
       title: '加载中'
     })
-    Taro.request({
+    Taro.request<BookSearchType,any>({
       url: `${mockPrefix}/bookSearch?keyword=${keyword}&sortType=${sortType}?page=${page}`
     }).then(callBack?callBack:(res) => {
-      this.bookList = res.data;
+      this.bookList = res.data.bookData;
+      this.maxPage=res.data.maxPage
     }).finally(() => Taro.hideLoading());
   };
   onReachBottom(): void {
-    this.currentPage++;
-    this.onRequestBookList(this.searchString, this.currentTab, this.currentPage, (res) => this.bookList = this.bookList.concat(res.data));
+    if (!this.reachToMaxPage) {
+      this.onRequestBookList(this.searchString, this.currentTab, this.currentPage, (res) => {
+        this.bookList = this.bookList.concat(res.data.bookData)
+        this.maxPage=res.data.maxPage
+        this.currentPage++
+        if (this.currentPage===res.data.maxPage){
+          this.reachToMaxPage = true;
+        }
+      });
+    }
   }
 
   render(): any {
@@ -53,7 +66,8 @@ class SearchDetail extends Component{
       <View>
         <SearchBar value={this.searchString} onFocus={this.navigateToSearchInputPage}/>
         <SortTab currentTab={this.currentTab} onChange={this.onSortChange}/>
-        <View>
+        <View className={'book-list-container'}>
+          <View className={'page-hint'}>{this.currentPage}/{this.maxPage}</View>
           <BookList bookList={this.bookList}/>
         </View>
       </View>
