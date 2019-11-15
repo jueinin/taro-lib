@@ -1,0 +1,48 @@
+@import "../../../../common/style/varibles";
+@import "../../../../common/style/custom";
+.container {
+
+}
+.hidden {
+  display: none;
+}
+.top-bar {
+  display: flex;
+  padding: 15px 0;
+  height: 200px;
+}
+.left {
+  flex-grow: 1;
+  text-align: center;
+}
+.right {
+  flex-grow: 1;
+  text-align: center;
+}
+.left,.right .inner {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.active {
+  color: red;
+  border-bottom: 4px solid red;
+}
+
+.item {
+  display: flex;
+  text-align: start;
+  margin-top: 25px;
+}
+.item-left {
+  flex-basis: 250px;
+  color: $gray-500;
+
+}
+.item-right {
+  flex-grow: 1;
+}
+.publish-detail {
+  margin-top: 20px;
+}

@@ -1,3 +1,5 @@
+
+import {unix} from 'moment'
 /**
  *  计算百分比
  * @param {number} smallNum
@@ -12,4 +14,9 @@ export function toPercent(smallNum: number, bigNum: number, digit: number) {
   let res:any = smallNum / bigNum;
   res = parseFloat((res*100).toFixed(digit))+"%"
   return res;
+}
+
+
+export function formatTime(unixTime: number, format: string="YYYY-MM-DD HH:mm") {
+  return unix(unixTime).format(format)
 }

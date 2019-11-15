@@ -3,8 +3,9 @@ import { Image, ScrollView, Swiper, SwiperItem, Text, View } from '@tarojs/compo
 import { BookDetailItemProps } from '../../../../common/types';
 import { toPercent } from '../../../../common/utils';
 import PromotionProductItem from "../../../../common/components/PromotionProductItem/PromotionProductItem";
-
-
+import './BookDetailItem.scss'
+import {observer} from "@tarojs/mobx";
+@observer
 class BookDetailItem extends Component<BookDetailItemProps> {
   static defaultProps= {
     images: [],
@@ -35,7 +36,7 @@ class BookDetailItem extends Component<BookDetailItemProps> {
           <Swiper
             indicatorDots
             indicatorColor={'#495057'}
-            indicatorActiveColor={'#fff'}
+            indicatorActiveColor={'#ede8ff'}
             autoplay
             circular
             className={'swiper'}
@@ -103,7 +104,7 @@ class BookDetailItem extends Component<BookDetailItemProps> {
           </View>
           <ScrollView className={'promote-scroll'} scrollX>
             {AdGoods.map((value) => {
-              return <PromotionProductItem key={value.bookId} imgUrl={value.imgUrl} title={value.title}  price={value.price} bookId={value.bookId} onClick={this.onToBookDetail}/>
+              return <PromotionProductItem outer-class={'promote-item'} key={value.bookId} imgUrl={value.imgUrl} title={value.title}  price={value.price} bookId={value.bookId} onClick={this.onToBookDetail}/>
             })}
           </ScrollView>
         </View>

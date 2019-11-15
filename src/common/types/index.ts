@@ -100,8 +100,8 @@ export type CommentPreview = {
     id: string;
   }[]
 }
-export type BookDetailItemProps = ProductInfo
-export type ProductInfo = {  // 目前是一样的, 后续上面的估计会加props,所以拆开了
+export type BookDetailItemProps = ProductInfoRes
+export type ProductInfoRes = {  // 目前是一样的, 后续上面的估计会加props,所以拆开了
   images: string[],
   price: number;
   title: string;
@@ -113,3 +113,34 @@ export type ProductInfo = {  // 目前是一样的, 后续上面的估计会加p
 }
 
 export type PromotionProductItemProps = Omit<BookItemProps,"comments" | "goodComments" | "author">; // 促销商品
+
+export type CommentItem={
+  name: string;
+  time: number; // 一般是unix时间
+  star: number; // 0-5星
+  commentText: string;
+  commentImg: string[];
+  id: string;
+}
+export type BookDetailCommentProps = {
+  comments: CommentItem[];
+}
+
+export type BookDetailCommentRes = BookDetailCommentProps;
+
+export type PublishInfo = {    // 出版信息   阉割一部分好了先
+  title: string;
+  ISBN: string;
+  author: string;
+  publisher: string;
+  publishTime: number;
+}
+export type BookDetailDetailsProps = {
+  publishInfo: PublishInfo;
+  details: string;  // 不太清楚这个图书详情那么多的图啥的怎么存储的, 估计是HTML存的
+};
+export type BookDetailDetailsRes = BookDetailDetailsProps;
+export enum BookDetailDetailsType {
+  图书详情,
+  出版信息
+}

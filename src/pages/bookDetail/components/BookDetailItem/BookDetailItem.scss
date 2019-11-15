@@ -158,7 +158,13 @@
     margin-left: auto;
   }
   &-scroll {
-
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    margin-top: 25px;
   }
 }
-
+.promote-item {
+  padding: 0 20px;
+}
