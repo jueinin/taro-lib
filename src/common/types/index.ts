@@ -8,7 +8,11 @@ export type AnyObject={
 export type OuterClass={  // 用来处理组件内部的class无法接收到外部的问题
   "outer-class": string;
 }
-export type BookItemProps= {
+export type BookItemProps = BookItemInfo & {
+  onClick: (bookId: string) => any
+};
+
+export type BookItemInfo = {
   imgUrl: string;
   title: string;
   author: string;
@@ -32,7 +36,7 @@ type ClassificationItem={
 }
 export type IndexState={
   classifications: ClassificationItem[][],
-  books: BookItemProps[];
+  books: BookItemInfo[];
 }
 
 export  type SearchItem = string;
@@ -93,18 +97,10 @@ export type CommentPreview = {
     commentImg: string[];
     avatar: string;
     name: string;
+    id: string;
   }[]
 }
-export type BookDetailItemProps = {
-  images: string[],
-  price: number;
-  title: string;
-  description: string;
-  author: string;
-  publisher: string;
-  AdGoods: BookItemProps[];
-  comment: CommentPreview;
-}
+export type BookDetailItemProps = ProductInfo
 export type ProductInfo = {  // 目前是一样的, 后续上面的估计会加props,所以拆开了
   images: string[],
   price: number;
@@ -112,6 +108,8 @@ export type ProductInfo = {  // 目前是一样的, 后续上面的估计会加p
   description: string;
   author: string;
   publisher: string;
-  AdGoods: BookItemProps[];
+  AdGoods: BookItemInfo[];
   comment: CommentPreview;
 }
+
+export type PromotionProductItemProps = Omit<BookItemProps,"comments" | "goodComments" | "author">; // 促销商品

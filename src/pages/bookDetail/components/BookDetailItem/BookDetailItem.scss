@@ -1,5 +1,13 @@
 @import "../../../../common/style/varibles";
 @import "../../../../common/style/custom";
+.container {
+  background: $gray-300;
+}
+.top-container {
+  background: #ffffff;
+  padding: 0 20px 20px 20px;
+  margin-bottom: 25px;
+}
 .swiper-img {
   width: 750px;
 }
@@ -20,5 +28,137 @@
   font-size: 0.9rem;
   margin-top: 20px;
   color: $gray-600;
-  @extend .ellipsis
+  //@extend .ellipsis
 }
+.author-publisher {
+  margin-top: 20px;
+  display: flex;
+  color: $gray-600;
+  font-size: $font-size-sm;
+  .author {
+    padding-left: 15px;
+    flex-grow: 1;
+  }
+  .publisher {
+    padding-left: 15px;
+    display: flex;
+    flex-grow: 1;
+    border-left: 2px solid $gray-400;
+  }
+  .arrow {
+    margin-left: auto;
+    color: $gray-400;
+  }
+}
+.comments {  // 评论区
+  background: #ffffff;
+  padding: 20px;
+  @extend .page;
+  .top-comment-bar {
+    display: flex;
+    align-items: center;
+    .comment-title {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+      margin-right: 10px;
+    }
+    .comment-subtitle {
+      @extend .sub-text;
+      margin-left: 10px;
+    }
+    .view-more {
+      margin-left: auto;
+    }
+  }
+  .tags {
+    display: flex;
+    flex-direction: row;
+    width: 750px;
+    white-space: nowrap;
+    margin-top: 25px;
+    .tag-item {
+      display: inline-block;
+      background: lightpink;
+      border-radius: 25px;
+      padding: 10px 25px;
+      margin-right: 15px;
+      font-size: $font-size-sm;
+      color: $gray-700;
+    }
+  }
+  .comment-preview {
+    @extend .tags;
+    &-item {
+      display: inline-flex;
+      align-items: center;
+      max-width: 650px;
+    }
+    &-left {
+      @extend .card;
+      width: 400px;
+      padding: 20px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      //margin-right: 20px;
+      margin-left: 20px;
+    }
+    &-avatar {
+      height: 50px;
+      width: 50px;
+      border-radius: 100%;
+      margin-right: 18px;
+    }
+    &-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    &-title {
+      @extend .sub-text;
+      transform: translateY(8px);
+    }
+    &-text {
+      @extend .ellipsis;
+      white-space: normal;
+      -webkit-line-clamp: 4;
+    }
+    &-img {
+      height: 138Px;
+      width: 220px;
+      image {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .view-more {
+      display: inline-flex;
+      height: 138Px;
+      width: 220px;
+      justify-content: center;
+      align-items: center;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+    }
+  }
+}
+.promote {
+  @extend .comments;
+  margin-top: 25px;
+  &-header {
+    @extend .top-comment-bar;
+  }
+  &-title {
+    @extend .comment-title;
+  }
+  &-ad {
+    background: $gray-500;
+    color: #ffffff;
+    font-size: .6em;
+    margin-left: auto;
+  }
+  &-scroll {
+
+  }
+}
+

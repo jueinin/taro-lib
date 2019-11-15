@@ -33,7 +33,7 @@ class App extends Component {
       "pages/classificationDetail/classificationDetail",
       "pages/searchInput/searchInput",
       "pages/searchDetail/searchDetail",
-      "pages/bookDetail/bookDetail",
+      "pages/bookDetail/bookDetail", // bookId
       "pages/test/test"
     ],
     window: {

@@ -1,19 +1,9 @@
 import Taro, { Component } from '@tarojs/taro';
 import { Image, ScrollView, Swiper, SwiperItem, Text, View } from '@tarojs/components';
-import { BookDetailItemProps, CommentPreview } from '../../../../common/types';
+import { BookDetailItemProps } from '../../../../common/types';
 import { toPercent } from '../../../../common/utils';
-import {ViewProps} from "@tarojs/components/types/View";
+import PromotionProductItem from "../../../../common/components/PromotionProductItem/PromotionProductItem";
 
-function Tag(props: CommentPreview['tags'][0]) {
-  return (
-    <View className={'tag-item'}>
-      {props.title}({props.amount})
-    </View>
-  );
-}
-function CommentPreview(props: CommentPreview['commentList'][0]) {
-  return <View className={'preview'}>{props.name}</View>;
-}
 
 class BookDetailItem extends Component<BookDetailItemProps> {
   static defaultProps= {
@@ -32,18 +22,16 @@ class BookDetailItem extends Component<BookDetailItemProps> {
     }
   }
   descriptionRef;
-  componentDidUpdate(prevProps: Readonly<BookDetailItemProps>, prevState: Readonly<{}>, snapshot?: any): void {
-    console.log(this.descriptionRef);
-  }
-  componentDidMount(): void {
-    console.log(this.descriptionRef);
-  }
-
+  onToBookDetail = (bookId: string) => {
+    Taro.navigateTo({
+      url: `/pages/bookDetail/bookDetail?bookId=${bookId}`
+    })
+  };
   render(): any {
-    let { images, price, title, author, publisher, description, comment } = this.props;
+    let { images, price, title, author, publisher, description, comment,AdGoods } = this.props;
     return (
-      <View className={'container page'}>
-        <View>
+      <View className={'container'}>
+        <View className={'top-container'}>
           <Swiper
             indicatorDots
             indicatorColor={'#495057'}
@@ -67,40 +55,58 @@ class BookDetailItem extends Component<BookDetailItemProps> {
           <View className={'author-publisher'}>
             <View className={'author'}>{author}</View>
             <View className={'publisher'}>
-              {publisher}
-              <Text>></Text>
+              {publisher || '暂无出版社信息'}
+              <Text className={'arrow'}>></Text>
             </View>
           </View>
         </View>
         {
           <View className={'comments'}>
             <View className={'top-comment-bar'}>
-              <Text>评论</Text> {toPercent(comment.goodComments, comment.comments, 2)}{' '}
-              <Text>(共{comment.comments}条评价)</Text>
+              <Text className={'comment-title'}>评论</Text>{toPercent(comment.goodComments, comment.comments, 2)}好评
+              <Text className={'comment-subtitle'}> (共{comment.comments}条评价) </Text>
+              <Text className={'view-more'}>查看更多<Text className={'fade-text'}>></Text></Text>
             </View>
             <ScrollView scrollX className={'tags'}>
               {comment.tags.map(value => (
-                <Tag title={value.title} amount={value.amount} />
+                <View className={'tag-item'}>
+                  {value.title}({value.amount})
+                </View>
               ))}
             </ScrollView>
             <ScrollView scrollX className={'comment-preview'}>
-              {comment.commentList.map((value, index) => {
+              {comment.commentList.map((value) => {
                 return (
-                  <CommentPreview
-                    commentText={value.commentText}
-                    commentImg={value.commentImg}
-                    avatar={value.avatar}
-                    name={value.name}
-                    key={index}
-                  />
+                  <View className={'comment-preview-item'} key={value.id}>
+                    <View className={'comment-preview-left'}>
+                      <View className={'comment-preview-header'}>
+                        <Image src={value.avatar} className={'comment-preview-avatar'}/>
+                        <Text className={'comment-preview-title'}>{value.name}</Text>
+                      </View>
+                      <Text className={'comment-preview-text'}>{value.commentText}</Text>
+                    </View>
+                    {value.commentImg.length!==0 && <View className={'comment-preview-img'}>
+                      <Image src={value.commentImg[0]} mode={"center"}/>
+                    </View>}
+                  </View>
                 );
               })}
+              {/*<View className={'view-more'}>*/}
+              {/*  查看更多*/}
+              {/*</View>*/}
             </ScrollView>
-            <View>
-
-            </View>
           </View>
         }
+        <View className={'promote'}>
+          <View className={'promote-header'}>
+            <Text className={'promote-title'}>推广商品</Text><Text className={'promote-ad'}>广告</Text>
+          </View>
+          <ScrollView className={'promote-scroll'} scrollX>
+            {AdGoods.map((value) => {
+              return <PromotionProductItem key={value.bookId} imgUrl={value.imgUrl} title={value.title}  price={value.price} bookId={value.bookId} onClick={this.onToBookDetail}/>
+            })}
+          </ScrollView>
+        </View>
       </View>
     );
   }
