@@ -1,0 +1,63 @@
+@import "../../common/style/varibles";
+@import "../../common/style/custom";
+.forum {
+  @extend .page;
+  .top-search {
+    display: flex;
+  }
+  .search {
+    flex-grow: 1;
+  }
+  .publish {
+    flex-basis: 100px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    .at-icon {
+      font-size: 30px;
+    }
+    .pub-text {
+      font-size: 20px;
+
+    }
+  }
+
+  .follow {
+    .item {
+      border-bottom: 2px solid $gray-200;
+      padding: 20px 0;
+      .top-follow {
+        margin-top: 14px;
+        align-items: center;
+        font-size: $font-size-sm;
+        color: $gray-600;
+        display: flex;
+        .at-avatar--small {
+          width: 40px;
+          margin-right: 20px;
+          height: 40px;
+        }
+      }
+      .title {
+        //font-size: $h2-font-size;
+        //font-weight: $font-weight-bold;
+        margin-top: 20px;
+      }
+      .bottom {
+        margin-top: 20px;
+        display: flex;
+        color: $gray-600;
+        font-size: 22px;
+        .tag {
+          margin-right: 20px;
+          .fa {
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+  }
+
+}
+

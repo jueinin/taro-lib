@@ -9,7 +9,7 @@ export type OuterClass={  // 用来处理组件内部的class无法接收到外�
   "outer-class": string;
 }
 export type BookItemProps = BookItemInfo & {
-  onClick: (bookId: string) => any
+  onClick: () => any
 };
 
 export type BookItemInfo = {
@@ -144,3 +144,32 @@ export enum BookDetailDetailsType {
   图书详情,
   出版信息
 }
+export enum ForumTab{
+  关注,
+  话题
+}
+export type FollowItem= {
+  authorName: string;
+  title: string;
+  avatar: string;
+  comments: number; // 评论数量
+  likes: number; // 点赞
+  lights: number; // 亮了
+  id: any;
+  onClick: () => any
+}
+export type FollowItemRes = Omit<FollowItem, 'onClick'>;
+export type FollowProps = {
+  data: FollowItem[];
+}
+export type HotBookClassification = {
+  icon: string;
+  title: string;
+  hots: number;
+}[];
+export type HotBooksRes = {
+  classification: string;
+  classificationId: number;
+  data: HotBookClassification
+}[];
+

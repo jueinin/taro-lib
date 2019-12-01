@@ -11,7 +11,7 @@ import img3 from '../../static/images/swiper/swiper-image3.jpg';
 import BookList from "../../common/components/BookList/BookList";
 import {mockPrefix} from "../../common/constants";
 import ClassificationIcon from "../../common/components/ClassificationIcon/ClassificationIcon";
-// import BookList from "../../common/components/BookList/BookList";
+import { bookInfoToProps } from '../../common/utils';
 
 class Index extends Component<any,IndexState> {
 
@@ -88,7 +88,7 @@ class Index extends Component<any,IndexState> {
       url: `${mockPrefix}/recommends`,
       success: res => {
         this.setState({
-          books: this.state.books.concat(res.data)
+          books: this.state.books.concat(res.data),
         })
       }
     })
@@ -102,6 +102,7 @@ class Index extends Component<any,IndexState> {
 
   render () {
     let {books,classifications=[]} = this.state;
+    let bookListProps = bookInfoToProps(books);
     return (
       <View className={'index'}>
         <SearchBar outer-class={'search-bar1'} onFocus={this.onToSearchInput}/>
@@ -133,7 +134,7 @@ class Index extends Component<any,IndexState> {
         <View className={'recommend'}>
             <View className={'for-you'}>为您推荐</View>
             <View>
-              <BookList bookList={books} />
+              <BookList bookList={bookListProps} />
             </View>
           </View>
       </View>

@@ -1,7 +1,7 @@
 import Taro, {Component} from '@tarojs/taro'
 import {View} from "@tarojs/components";
 import SortTab from "../../common/components/SortTab/SortTab";
-import {BookListProps, BookSearchType, FilterTabType} from "../../common/types";
+import { BookItemInfo, BookListProps, BookSearchType, FilterTabType } from '../../common/types';
 import './searchDetail.scss';
 import SearchBar from "../../common/components/SearchBar/SearchBar";
 import {observer} from "@tarojs/mobx";
@@ -13,7 +13,7 @@ import BookList from "../../common/components/BookList/BookList";
 class SearchDetail extends Component{
   @observable searchString: string = "";
   @observable currentTab: FilterTabType = FilterTabType.默认;
-  @observable bookList: BookListProps = [];
+  @observable bookList: BookItemInfo[] = [];
   @observable currentPage: number = 1;
   reachToMaxPage: boolean = false;
   @observable maxPage:number|string="";
@@ -30,6 +30,11 @@ class SearchDetail extends Component{
   navigateToSearchInputPage = () => {
     Taro.navigateTo({
       url: "/pages/searchInput/searchInput?keyword=" + this.searchString
+    })
+  };
+  navigateToBookItemPage = (bookId: string) => {
+    Taro.navigateTo({
+      url: `/pages/bookDetail/bookDetail?bookId=${bookId}`
     })
   };
   onSortChange=(tab:FilterTabType)=>{
@@ -62,13 +67,18 @@ class SearchDetail extends Component{
   }
 
   render(): any {
+    let list: BookListProps = this.bookList.map((value) => {
+      // @ts-ignore
+      value.onClick = () => this.navigateToBookItemPage(value.bookId);
+      return value;
+    }) as BookListProps;
     return <View>
       <View>
         <SearchBar value={this.searchString} onFocus={this.navigateToSearchInputPage}/>
         <SortTab currentTab={this.currentTab} onChange={this.onSortChange}/>
         <View className={'book-list-container'}>
           <View className={'page-hint'}>{this.currentPage}/{this.maxPage}</View>
-          <BookList bookList={this.bookList}/>
+          <BookList bookList={list}/>
         </View>
       </View>
     </View>

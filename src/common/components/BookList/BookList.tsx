@@ -16,7 +16,7 @@ class BookList extends Component<Props> {
       <View>
         {bookList.map((book,index)=>{
           return <BookItem key={index} imgUrl={book.imgUrl} title={book.title} author={book.author} price={book.price}
-                           comments={book.comments} goodComments={book.goodComments} bookId={book.bookId}/>
+                           comments={book.comments} goodComments={book.goodComments} bookId={book.bookId} onClick={book.onClick}/>
         })}
       </View>
     );

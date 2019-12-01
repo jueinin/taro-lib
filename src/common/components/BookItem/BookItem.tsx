@@ -11,7 +11,8 @@ class BookItem extends Component<BookItemProps> {
     author: "",
     bookId: "",
     goodComments: 0,
-    comments: 0
+    comments: 0,
+    onClick: ()=>{}
   };
   static externalClass = ['outer-class'];
   toPercentage=(goodComments:number,comments:number)=>{
@@ -22,9 +23,9 @@ class BookItem extends Component<BookItemProps> {
     return (res * 100).toPrecision(3) + "%";
   }
   render() {
-    let {imgUrl,title,author,price, comments,goodComments} = this.props;
+    let {imgUrl,title,author,price, comments,goodComments,onClick} = this.props;
     return (
-      <View className={'book-item outer-class'}>
+      <View className={'book-item outer-class'} onClick={onClick}>
         <View className={'img'}>
           <Image src={imgUrl}/>
         </View>
