@@ -1,3 +1,4 @@
+/*
 import { DependencyList, useCallback, useState, useRef, useEffect } from '@tarojs/taro';
 
 class Timer<T> {
@@ -104,7 +105,7 @@ function useAsync<Result = any>(
   const run = useCallback((...args: any[]): Promise<Result | undefined> => {
     // 确保不会返回被取消的结果
     const runCount = count.current;
-    /* 当前参数保存一下 */
+    /!* 当前参数保存一下 *!/
     params.current = args;
     set(s => ({ ...s, loading: true }));
     return fnRef
@@ -129,7 +130,7 @@ function useAsync<Result = any>(
       });
   }, []);
 
-  /* 软取消，由于竞态，需要取消上一次的请求 */
+  /!* 软取消，由于竞态，需要取消上一次的请求 *!/
   const softCancel = useCallback(() => {
     if (autoCancel) {
       count.current += 1;
@@ -137,7 +138,7 @@ function useAsync<Result = any>(
     }
   }, [autoCancel]);
 
-  /* 强制取消，组件卸载，或者用户手工取消 */
+  /!* 强制取消，组件卸载，或者用户手工取消 *!/
   const forceCancel = useCallback(() => {
     count.current += 1;
     set(s => ({ ...s, loading: false }));
@@ -195,7 +196,7 @@ function useAsync<Result = any>(
       // deps 变化时，重新执行
       start();
     }
-    /* 如果 desp 变化，强制取消 */
+    /!* 如果 desp 变化，强制取消 *!/
     return () => {
       if (timer.current) {
         timer.current.stop();
@@ -220,3 +221,4 @@ function useAsync<Result = any>(
 }
 
 export default useAsync;
+*/

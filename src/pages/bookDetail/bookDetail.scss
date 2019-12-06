@@ -4,7 +4,10 @@
   background: $gray-100;
   display: flex;
   justify-content: space-around;
-  width: 750rpx;
+  width: 750px;
+  button {
+    @extend .common-title;
+  }
 }
 .hidden {
   display: none;

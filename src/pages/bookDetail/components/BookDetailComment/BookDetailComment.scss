@@ -16,21 +16,22 @@
   align-items: center;
 }
 .name {
-  color: #000;
+  @extend .common-title;
+  font-weight: normal;
   margin-right: auto;
   //font-size: $font-size-lg;
 }
 .time {
   margin-left: auto;
-  font-size: $font-size-sm;
+  @extend .common-text;
+  color: $gray-500;
 }
 .star {
   margin-top: 15px;
   margin-bottom: 15px;
 }
 .text {
-  font-size: $font-size-sm;
-
+  @extend .common-text;
 }
 .imgs {
   height: 150px;

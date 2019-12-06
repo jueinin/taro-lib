@@ -3,6 +3,7 @@ import {Text, View} from "@tarojs/components";
 import {BookDetailDetailsProps, BookDetailDetailsType} from "../../../../common/types";
 import {observable} from "mobx";
 import classNames from "classnames";
+import './BookDetailDetails.scss'
 import {observer} from "@tarojs/mobx";
 @observer
 class BookDetailDetails extends Component<BookDetailDetailsProps>{   // 书籍详情的详情图文部分

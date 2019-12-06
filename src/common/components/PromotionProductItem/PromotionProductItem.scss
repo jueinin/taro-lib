@@ -9,9 +9,10 @@
     height: 150px;
   }
   .title {
-    font-size: $font-size-sm;
-    @extend .ellipsis;
+    @extend .ellipsis,.common-text;
     white-space: normal;
+    display: inline-block;
+    height: 60px;
   }
   .price {
     margin-top: 20px;

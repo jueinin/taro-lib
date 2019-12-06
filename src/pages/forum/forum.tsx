@@ -8,7 +8,7 @@ import { mockPrefix } from '../../common/constants';
 import useLoadMore from '../../common/hooks/useLoadMore';
 import useReachBottom = Taro.useReachBottom;
 import useMemo = Taro.useMemo;
-import useAsync from '../../common/hooks/useAsync';
+import useEffect = Taro.useEffect;
 
 
 const tabList:any = [
@@ -31,17 +31,12 @@ const Forum = () => {
       loadMore();
     }
   });
-  // const [hotBooksRes, setHotBooksRes] = useState<HotBooksRes>();
-  const {data: hotBooksRes}=useAsync<HotBooksRes>(()=>{
-    return Taro.request({
+  const [hotBooksRes, setHotBooksRes] = useState<HotBooksRes>();
+  useEffect(() => {
+    Taro.request({
       url: `${mockPrefix}/hotBooks`,
-    }).then(res => res.data);
-  },{
-    manual: true,
-    onSuccess: (data, params) => {
-      console.log(data, params, 'dsada');
-    }
-  })
+    }).then(res => setHotBooksRes(res.data));
+  });
   const flowParse = useMemo(()=>followData.map(value => {
     // @ts-ignore
     value.onClick = () => Taro.navigateTo({

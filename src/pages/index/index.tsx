@@ -3,15 +3,14 @@ import {View, Swiper, SwiperItem, Image} from '@tarojs/components'
 
 import './index.scss'
 import SearchBar from "../../common/components/SearchBar/SearchBar";
-import {IndexState} from "../../common/types";
+import { BookItemInfo, IndexState } from '../../common/types';
 import icon from '../../static/images/icons/icon.png';
 import img1 from '../../static/images/swiper/swiper-image1.jpg';
 import img2 from '../../static/images/swiper/swiper-image2.jpg';
 import img3 from '../../static/images/swiper/swiper-image3.jpg';
-import BookList from "../../common/components/BookList/BookList";
 import {mockPrefix} from "../../common/constants";
 import ClassificationIcon from "../../common/components/ClassificationIcon/ClassificationIcon";
-import { bookInfoToProps } from '../../common/utils';
+import BookItem from '../../common/components/BookItem/BookItem';
 
 class Index extends Component<any,IndexState> {
 
@@ -101,42 +100,49 @@ class Index extends Component<any,IndexState> {
   }
 
   render () {
-    let {books,classifications=[]} = this.state;
-    let bookListProps = bookInfoToProps(books);
+    let {books=[],classifications=[]} = this.state;
     return (
       <View className={'index'}>
         <SearchBar outer-class={'search-bar1'} onFocus={this.onToSearchInput}/>
         <View className={'top-swiper'}>
           <Swiper className={'swiper'} indicatorDots autoplay indicatorColor={'#B0B0A8'}>
             <SwiperItem>
-              <Image src={img1} className={'swiper-item'} mode={"scaleToFill"}/>
+              <Image src={img1} className={'swiper-item'} mode={'scaleToFill'}/>
             </SwiperItem>
             <SwiperItem>
-              <Image src={img2} className={'swiper-item'} mode={"scaleToFill"}/>
+              <Image src={img2} className={'swiper-item'} mode={'scaleToFill'}/>
             </SwiperItem>
             <SwiperItem>
-              <Image src={img3} className={'swiper-item'} mode={"scaleToFill"}/>
+              <Image src={img3} className={'swiper-item'} mode={'scaleToFill'}/>
             </SwiperItem>
           </Swiper>
         </View>
         <View className={'classifications'}>
-          {classifications.map((_row,index)=>{
-            return <View className={'row'}>
-              {classifications[index].map((item,_indexs)=>{
+          {classifications.map((_row, index) => {
+            return <View className={'row'} key={index}>
+              {classifications[index].map((item, _indexs) => {
                 return <View className={'item'}>
                   <ClassificationIcon key={_indexs} title={item.title} imgUrl={item.imgUrl}
                                       onClick={() => this.onIconClick(item.title)}/>
-                </View>
+                </View>;
               })}
-            </View>
+            </View>;
           })}
         </View>
         <View className={'recommend'}>
-            <View className={'for-you'}>为您推荐</View>
-            <View>
-              <BookList bookList={bookListProps} />
-            </View>
+          <View className={'for-you'}>为您推荐</View>
+          <View>
+            {
+              books.map((value: BookItemInfo) => {
+                return <BookItem key={value.bookId} author={value.author} bookId={value.bookId}
+                                 comments={value.comments} goodComments={value.goodComments} imgUrl={value.imgUrl}
+                                 price={value.price} title={value.title} onClick={(bookId) => Taro.navigateTo({
+                  url: `/pages/bookDetail/bookDetail?bookId=${bookId}`,
+                })}/>;
+              })
+            }
           </View>
+        </View>
       </View>
     );
   }

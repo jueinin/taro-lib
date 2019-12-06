@@ -64,8 +64,8 @@ class BookDetailItem extends Component<BookDetailItemProps> {
         {
           <View className={'comments'}>
             <View className={'top-comment-bar'}>
-              <Text className={'comment-title'}>评论</Text>{toPercent(comment.goodComments, comment.comments, 2)}好评
-              <Text className={'comment-subtitle'}> (共{comment.comments}条评价) </Text>
+              <Text className={'comment-title'}>评论</Text>
+              <Text className={'comment-subtitle'}>{toPercent(comment.goodComments, comment.comments, 2)}好评 (共{comment.comments}条评价) </Text>
               <Text className={'view-more'}>查看更多<Text className={'fade-text'}>></Text></Text>
             </View>
             <ScrollView scrollX className={'tags'}>

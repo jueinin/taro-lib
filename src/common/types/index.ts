@@ -9,7 +9,7 @@ export type OuterClass={  // 用来处理组件内部的class无法接收到外�
   "outer-class": string;
 }
 export type BookItemProps = BookItemInfo & {
-  onClick: () => any
+  onClick: (bookId: string) => any
 };
 
 export type BookItemInfo = {

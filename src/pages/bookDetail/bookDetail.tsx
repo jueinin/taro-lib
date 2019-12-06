@@ -22,7 +22,7 @@ class BookDetail extends Component {
   @observable productInfo: ProductInfoRes;  // 商品信息
   @observable comments: CommentItem[];  // 这个评论目测后续可能会加东西进来
   @observable commentPage = 1;
-  @observable details:BookDetailDetailsRes   // 详情
+  @observable details:BookDetailDetailsRes   // 详情d
   componentDidMount(): void {
     // 请求商品页接口
     this.onRequestProductInfo(this.$router.params.bookId);

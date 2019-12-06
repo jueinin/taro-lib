@@ -5,6 +5,7 @@ import {AtRate} from "taro-ui";
 import './BookDetailComment.scss'
 import {formatTime} from "../../../../common/utils";
 import {observer} from "@tarojs/mobx";
+import previewImage = Taro.previewImage;
 @observer
 class BookDetailComment extends Component<BookDetailCommentProps>{
   static externalClasses = ['outer-class'];
@@ -27,7 +28,9 @@ class BookDetailComment extends Component<BookDetailCommentProps>{
           </View>
           <View className={'imgs'}>
             {value.commentImg.map(imgUrl => {
-              return <Image className={'img'} src={imgUrl}/>
+              return <Image onClick={()=>previewImage({
+                urls: [imgUrl],
+              })} className={'img'} src={imgUrl}/>
             })}
           </View>
           <View className={'line'}/>

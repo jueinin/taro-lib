@@ -11,7 +11,7 @@
   }
   .img image {
     height: 260px;
-    width: 400px;
+    width: 200px;
   }
   .right {
     flex-grow: 1;
@@ -20,7 +20,7 @@
   }
   .title {
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 400;
   }
   .author {
     font-size: 24px;
@@ -32,7 +32,7 @@
     color: $gray-600;
   }
   .price {
-    font-size: 40px;
+    font-size: 30px;
     color: $red;
     font-weight: bold;
     padding: 16px 0;

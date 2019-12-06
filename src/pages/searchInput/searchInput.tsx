@@ -48,7 +48,7 @@ class SearchInput extends Component<{},any> {
   onRequestSearchTip = debounce((title: string) => {
     if (title === "") {
       this.candidateList = [];
-      return; // 防止异步造成candilist一直不为空
+      return; // 防止异步造成candidate list一直不为空
     }
     Taro.addInterceptor(searchTips);
     Taro.request({

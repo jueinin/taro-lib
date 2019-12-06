@@ -9,7 +9,6 @@
 .top-bar {
   display: flex;
   padding: 15px 0;
-  height: 200px;
 }
 .left {
   flex-grow: 1;
@@ -19,11 +18,8 @@
   flex-grow: 1;
   text-align: center;
 }
-.left,.right .inner {
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
+.left,.right {
+  padding: 18px;
 }
 .active {
   color: red;
@@ -37,11 +33,12 @@
 }
 .item-left {
   flex-basis: 250px;
+  @extend .common-text;
   color: $gray-500;
-
 }
 .item-right {
-  flex-grow: 1;
+  flex-basis: 500px;
+  @extend .common-text;
 }
 .publish-detail {
   margin-top: 20px;

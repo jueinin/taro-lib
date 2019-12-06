@@ -1,3 +1,4 @@
+@import "../../common/style/varibles";
 .index {
   .search-bar1 {
     margin-bottom: 8px;
@@ -33,10 +34,12 @@
   }
 
   .for-you {
-    font-size: 36px;
+    font-size: 28px;
     font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     margin-left: 10px;
+    //border-bottom: 2px solid $gray-400;
+    //border-top: 2px solid $gray-400;
   }
 }

@@ -15,17 +15,17 @@
   height: 800px;
 }
 .price {
-  font-size: $font-size-lg;
+  @extend .common-title;
   font-weight: $font-weight-bolder;
+  font-size: 36px;
   color: red;
 }
 .title {
-  font-size: $font-size-lg;
-  font-weight: $font-weight-bolder;
+  @extend .comment-title;
   margin-top: 25px;
 }
 .description {
-  font-size: 0.9rem;
+  @extend .common-text;
   margin-top: 20px;
   color: $gray-600;
   //@extend .ellipsis
@@ -34,7 +34,7 @@
   margin-top: 20px;
   display: flex;
   color: $gray-600;
-  font-size: $font-size-sm;
+  @extend .common-text;
   .author {
     padding-left: 15px;
     flex-grow: 1;
@@ -53,18 +53,18 @@
 .comments {  // 评论区
   background: #ffffff;
   padding: 20px;
-  @extend .page;
+  @extend .page,.common-text;
   .top-comment-bar {
     display: flex;
     align-items: center;
     .comment-title {
-      font-size: $font-size-lg;
-      font-weight: $font-weight-bold;
+      @extend .common-title;
       margin-right: 10px;
     }
     .comment-subtitle {
-      @extend .sub-text;
+      @extend .common-text;
       margin-left: 10px;
+      align-self: flex-end;
     }
     .view-more {
       margin-left: auto;
@@ -82,7 +82,7 @@
       border-radius: 25px;
       padding: 10px 25px;
       margin-right: 15px;
-      font-size: $font-size-sm;
+      @extend .common-text;
       color: $gray-700;
     }
   }
@@ -115,8 +115,9 @@
       margin-bottom: 10px;
     }
     &-title {
-      @extend .sub-text;
-      transform: translateY(8px);
+      @extend .common-title;
+      font-weight: normal;
+      color: $gray-500;
     }
     &-text {
       @extend .ellipsis;
@@ -154,7 +155,7 @@
   &-ad {
     background: $gray-500;
     color: #ffffff;
-    font-size: .6em;
+    font-size: 20px;
     margin-left: auto;
   }
   &-scroll {
@@ -167,4 +168,5 @@
 }
 .promote-item {
   padding: 0 20px;
+  @extend .common-text;
 }
