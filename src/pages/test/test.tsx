@@ -1,10 +1,13 @@
 import Taro, {Component} from '@tarojs/taro'
-import { Input, View } from '@tarojs/components';
 import './test.scss'
+import { AtButton } from 'taro-ui';
+import { View } from '@tarojs/components';
 class Test extends Component{
+  static config ={
+  }
   render(): any {
     return <View>
-      <Input onInput={() => console.log('fff')}/>
+      <AtButton>dsds</AtButton>
     </View>;
   }
 }

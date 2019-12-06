@@ -11,7 +11,6 @@ import img3 from '../../static/images/swiper/swiper-image3.jpg';
 import {mockPrefix} from "../../common/constants";
 import ClassificationIcon from "../../common/components/ClassificationIcon/ClassificationIcon";
 import BookItem from '../../common/components/BookItem/BookItem';
-
 class Index extends Component<any,IndexState> {
 
   /**

@@ -2,13 +2,14 @@ import Taro, { useState } from '@tarojs/taro';
 import { View } from '@tarojs/components';
 import SearchBar from '../../common/components/SearchBar/SearchBar';
 import './forum.scss';
-import { AtAvatar, AtTabs, AtTabsPane } from 'taro-ui';
+import { AtAvatar, AtGrid, AtTabs, AtTabsPane } from 'taro-ui';
 import { FollowItem, FollowItemRes, ForumTab, HotBooksRes } from '../../common/types';
 import { mockPrefix } from '../../common/constants';
 import useLoadMore from '../../common/hooks/useLoadMore';
 import useReachBottom = Taro.useReachBottom;
 import useMemo = Taro.useMemo;
 import useEffect = Taro.useEffect;
+import { Item } from 'taro-ui/@types/grid';
 
 
 const tabList:any = [
@@ -31,19 +32,16 @@ const Forum = () => {
       loadMore();
     }
   });
-  const [hotBooksRes, setHotBooksRes] = useState<HotBooksRes>();
+  const [currentHotBookTab, setCurrentHotBookTab] = useState(0);
+  const [hotBooksRes, setHotBooksRes]  = useState<HotBooksRes>([]);
   useEffect(() => {
     Taro.request({
       url: `${mockPrefix}/hotBooks`,
-    }).then(res => setHotBooksRes(res.data));
-  });
-  const flowParse = useMemo(()=>followData.map(value => {
-    // @ts-ignore
-    value.onClick = () => Taro.navigateTo({
-      url: '/pages', // todo dd
-    });
-    return value;
-  }) as unknown as FollowItem[], [followData]);
+    }).then(res => setHotBooksRes(res.data.data));
+  }, []);
+  const onHotBookClick = (item:Item,index) => {
+    console.log(item);
+  };
   return <View className={'forum'}>
     <View className={'top-search'}>
       <View className={'search'}><SearchBar placeholder={'请输入关键字搜索'}/></View>
@@ -55,9 +53,11 @@ const Forum = () => {
     <View className={'main'}>
       <AtTabs current={currentTab} tabList={tabList} onClick={setCurrentTab}>
         <AtTabsPane current={ForumTab.关注} index={0}>
-          {flowParse.length!==0 && <View className={'follow'}>
-            {flowParse.map((value) => {
-              return <View onClick={value.onClick} className={'item'} key={value.id}>
+          {followData.length && <View className={'follow'}>
+            {followData.map((value) => {
+              return <View onClick={()=>Taro.navigateTo({
+                url: ""
+              })} className={'item'} key={value.id}>
                 <View className={'top-follow'}>
                   <AtAvatar size={'small'} circle image={value.avatar}/>
                   <View className={'at-col-offset-3'}>{value.authorName}</View>
@@ -75,14 +75,26 @@ const Forum = () => {
             })}
           </View>}
         </AtTabsPane>
-        <AtTabsPane current={ForumTab.话题} index={1}>
+        <AtTabsPane current={ForumTab.热门图书} index={1}>
           <View className={'hot-books'}>
-            {hotBooksRes && <AtTabs current={hotBooksRes[0].classificationId} tabList={hotBooksRes.map(value=>{
+            {hotBooksRes.length &&
+            <AtTabs height={"350px"} tabDirection={'vertical'} current={currentHotBookTab} tabList={hotBooksRes.map(value=>{
               return {
                 title: value.classification
               }
-            })} onClick={()=>{}}>
-
+            })} onClick={(index:number)=>{
+              setCurrentHotBookTab(index)
+            }}>
+              {hotBooksRes.map((value, index) => {
+                return <AtTabsPane key={value.classificationId} tabDirection={'vertical'} current={currentHotBookTab} index={index}>
+                  <View className={'grid'}>
+                    <AtGrid className={'grid-component'} hasBorder={false} columnNum={3} data={value.data.map(value1 => ({
+                      value: value1.title,
+                      image: value1.icon
+                    }))} onClick={onHotBookClick}/>
+                  </View>
+                </AtTabsPane>
+              })}
             </AtTabs>}
           </View>
         </AtTabsPane>
@@ -90,5 +102,7 @@ const Forum = () => {
     </View>
   </View>
 };
-
+Forum.options = {
+  addGlobalClass: true,
+};
 export default Forum;

@@ -146,7 +146,7 @@ export enum BookDetailDetailsType {
 }
 export enum ForumTab{
   关注,
-  话题
+  热门图书
 }
 export type FollowItem= {
   authorName: string;
