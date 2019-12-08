@@ -22,7 +22,9 @@
 
     }
   }
-
+  .main-tab {
+    max-height: calc(100vh - 36*2px);
+  }
   .follow {
     .item {
       border-bottom: 2px solid $gray-200;
@@ -58,6 +60,8 @@
     }
   }
   .hot-books {
+    height: calc(100vh - 82*2px);
+    overflow: hidden;
     .grid {
       padding: 25px;
     }

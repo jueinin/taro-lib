@@ -1,0 +1,29 @@
+@import "../../common/style/varibles";
+@import "../../common/style/custom";
+.post-detail {
+  @extend .page;
+  .title {
+    @extend .common-title;
+    font-size: 40px;
+  }
+  .content {
+    @extend .common-text;
+  }
+  .comment-bar {
+    display: flex;
+    padding: 16px;
+    border-left: 2px solid red;
+    box-sizing: border-box;
+    &-left {
+      margin-right: auto;
+      margin-left: 8px;
+    }
+    .sort-type {
+      @extend .common-text;
+      .fa {
+        margin-left: 8px;
+      }
+    }
+  }
+}
+

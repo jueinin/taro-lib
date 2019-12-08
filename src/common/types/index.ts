@@ -172,4 +172,27 @@ export type HotBooksRes = {
   classificationId: number;
   data: HotBookClassification
 }[];
-
+export type ForumCommonItem = {
+  commentId: number;
+  commentContent: string;
+  lights: number;
+  commentAmount: number;
+  name: string;
+  avatar: string;
+  commentTime: number;
+  preComment?: Omit<ForumCommonItem, "preComment">;
+}
+export type PostDetailInfo = {
+  title: string;
+  authorName: string;
+  postTime: number;
+  readAmount: number;
+  content: string;
+  lightCommentData: ForumCommonItem[];
+}
+export enum PostDetailSortType {
+  最早回复="最早回复",
+  亮度排序="亮度排序",
+  最晚回复="最晚回复",
+  只看楼主="只看楼主",
+}

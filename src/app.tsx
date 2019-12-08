@@ -1,18 +1,18 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { Provider } from '@tarojs/mobx'
-import Index from './pages/index'
-import counterStore from './store/counter'
+import IndexStore from './store/index'
 import './app.scss'
 import './common/style/font-awesome-4.7.0/css/font-awesome.scss'
+import { observable } from 'mobx';
+import Index from './pages/index';
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }
 
-const store = {
-  counterStore
-}
+const store = observable.box(new IndexStore());
+
 
 class App extends Component {
 
@@ -32,6 +32,7 @@ class App extends Component {
       "pages/searchInput/searchInput",
       "pages/searchDetail/searchDetail",
       "pages/bookDetail/bookDetail", // bookId
+      "pages/postDetail/postDetail",  // postId
       "pages/test/test"
     ],
     window: {

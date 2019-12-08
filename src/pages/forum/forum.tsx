@@ -51,12 +51,12 @@ const Forum = () => {
       </View>
     </View>
     <View className={'main'}>
-      <AtTabs current={currentTab} tabList={tabList} onClick={setCurrentTab}>
+      <AtTabs current={currentTab} className={'main-tab'} tabList={tabList} onClick={setCurrentTab}>
         <AtTabsPane current={ForumTab.关注} index={0}>
           {followData.length && <View className={'follow'}>
             {followData.map((value) => {
               return <View onClick={()=>Taro.navigateTo({
-                url: ""
+                url: '/pages/postDetail/postDetail?postId=' + value.id,
               })} className={'item'} key={value.id}>
                 <View className={'top-follow'}>
                   <AtAvatar size={'small'} circle image={value.avatar}/>
@@ -78,7 +78,7 @@ const Forum = () => {
         <AtTabsPane current={ForumTab.热门图书} index={1}>
           <View className={'hot-books'}>
             {hotBooksRes.length &&
-            <AtTabs height={"350px"} tabDirection={'vertical'} current={currentHotBookTab} tabList={hotBooksRes.map(value=>{
+            <AtTabs height={"calc(100vh - 82px)"} tabDirection={'vertical'} current={currentHotBookTab} tabList={hotBooksRes.map(value=>{
               return {
                 title: value.classification
               }
