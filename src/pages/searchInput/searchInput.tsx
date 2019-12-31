@@ -1,7 +1,7 @@
 import Taro, {Component} from '@tarojs/taro'
 import {Text, View} from "@tarojs/components";
 // import SearchBar from "../../common/components/SearchBar/SearchBar";
-import {mockPrefix, storage} from "../../common/constants";
+import { apiPrefix, mockPrefix, storage } from '../../common/constants';
 import {observer} from "@tarojs/mobx";
 import {observable} from "mobx";
 import {SearchCandidateItem, SearchItem} from "../../common/types";
@@ -11,11 +11,11 @@ import classNames from "classnames";
 // import SearchCandidateList from "../../common/components/SearchCandidateList/SearchCandidateList";
 import SearchBarWithTips from "../../composeComponents/SearchBarWithTips/SearchBarWithTips";
 import debounce from 'lodash/debounce';
-import {searchTips} from "../../common/interceptor";
+import { wxRequest } from '../../common/utils';
 const partUrl = "/pages/searchDetail/searchDetail?keyword=";
 @observer
 class SearchInput extends Component<{},any> {
-  @observable hotSearch: SearchItem[] = [];
+  @observable hotSearch: SearchItem[] = null;
   @observable recentSearch: SearchItem[] = [];
   @observable searchString = "";
   @observable candidateList: SearchCandidateItem[] = [];
@@ -23,16 +23,16 @@ class SearchInput extends Component<{},any> {
     Taro.navigateBack();
   };
   getHotSearch = () => {
-    Taro.request({
-      url: `${mockPrefix}/hotSearchKeyword`,
+    wxRequest({
+      url: `${apiPrefix}/hotSearchKeyword`,
       success: res => {
-        this.hotSearch = this.hotSearch.concat(res.data.keywords);
+        this.hotSearch = res.data.keywords;
       }
     })
   };
-  onSearch=(e:BaseEventOrig<{value:string}>)=>{
-    this.navigateTo(partUrl + e.detail.value,e.detail.value)
-  }
+  onSearch = (e: BaseEventOrig<{ value: string }>) => {
+    this.navigateTo(partUrl + e.detail.value, e.detail.value);
+  };
   navigateTo=(url:string,title:string,save:boolean=true)=>{ //title用来方便处理而已
     Taro.navigateTo({
       url: url,
@@ -50,10 +50,16 @@ class SearchInput extends Component<{},any> {
       this.candidateList = [];
       return; // 防止异步造成candidate list一直不为空
     }
-    Taro.addInterceptor(searchTips);
-    Taro.request({
-      url: `${mockPrefix}/searchTips?title=${title}`,
+    wxRequest({
+      url: `${apiPrefix}/searchTips?title=${title}`,
     }).then(res => {
+      res.data = res.data.map(value => {
+        value.subTitle = `约${(value as any).resultCount}个结果`;
+        value.title = value.name;
+        delete value.name;
+        delete (value as any).resultCount;
+        return value;
+      });
       this.candidateList = res.data;
     })
   }, 500);
@@ -89,10 +95,10 @@ class SearchInput extends Component<{},any> {
         <View className={'tab'}>
           <Text>热门搜索</Text>
           <View className={'content'}>
-            {this.hotSearch.map((value, index) => {
+            {this.hotSearch ? this.hotSearch.map((value, index) => {
               return <View className={'item'} key={index}
                            onClick={() => this.navigateTo(partUrl + value, value)}>{value}</View>
-            })}
+            }):""}
           </View>
         </View>
         <View className={'tab'}>

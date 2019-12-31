@@ -1,18 +1,28 @@
-import Taro, { Component, Config } from '@tarojs/taro'
-import { Provider } from '@tarojs/mobx'
-import IndexStore from './store/index'
+import Taro, { Component, Config} from '@tarojs/taro'
 import './app.scss'
 import './common/style/font-awesome-4.7.0/css/font-awesome.scss'
-import { observable } from 'mobx';
+import '@tarojs/async-await'
 import Index from './pages/index';
+import { configRequest } from './common/hooks';
+import request = Taro.request;
+import getStorage = Taro.getStorage;
+import getStorageSync = Taro.getStorageSync;
+import { apiPrefix } from './common/constants';
+import setStorageSync = Taro.setStorageSync;
+import login = Taro.login;
+import getSetting = Taro.getSetting;
+import { get } from 'lodash';
+import getUserInfo = Taro.getUserInfo;
+import { UserStore } from './store/userStore';
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
 //   require('nerv-devtools')
 // }
-
-const store = observable.box(new IndexStore());
-
+const store = {
+  userStore: new UserStore(),
+}
+export const StoreContext = Taro.createContext<typeof store>(store);
 
 class App extends Component {
 
@@ -26,14 +36,18 @@ class App extends Component {
   config: Config = {
     pages: [
       'pages/index/index',
-      "pages/me/me",
-      "pages/forum/forum",
-      "pages/classificationDetail/classificationDetail",
-      "pages/searchInput/searchInput",
-      "pages/searchDetail/searchDetail",
-      "pages/bookDetail/bookDetail", // bookId
-      "pages/postDetail/postDetail",  // postId
-      "pages/test/test"
+      'pages/me/me',
+      'pages/forum/forum',
+      'pages/classificationDetail/classificationDetail',
+      'pages/searchInput/searchInput',
+      'pages/searchDetail/searchDetail',
+      'pages/bookDetail/bookDetail', // bookId
+      'pages/postDetail/postDetail',  // postId
+      'pages/login/login',
+      'pages/signUp/signUp',
+      'pages/personalSetting/personalSetting',
+      'pages/browsingHistory/browsingHistory',
+      'pages/test/test',
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -69,7 +83,35 @@ class App extends Component {
     }
   }
 
-  componentDidMount () {}
+  componentDidMount () {  // 首次打开没有token的时候拿一个token，后面所有需要session的接口都要加个header auth去把token带上
+    let sessionId = getStorageSync('sessionId');
+    if (!sessionId) {
+      // 先拿到code再从服务端用jwt拿到sessionId
+      login({
+        success: res =>{
+          request({
+            url: `${apiPrefix}/auth?code=${res.code}`,
+          }).then(value => {
+            setStorageSync('sessionId', value.data.token);
+          });
+        }
+      })
+    }
+    // 有权限就拿一下userInfo，没有拉倒
+    getSetting({
+      success: (res)=>{
+        if (get(res, ['authSetting', 'scope.userInfo'], false)) {
+          // 有权限
+          getUserInfo({
+            lang: 'zh_CN',
+            success: res1 => {
+              store.userStore.setUserInfo(res1.userInfo);
+            },
+          });
+        }
+      }
+    })
+  }
 
   componentDidShow () {}
 
@@ -81,9 +123,9 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Provider store={store}>
+      <StoreContext.Provider value={store}>
         <Index />
-      </Provider>
+      </StoreContext.Provider>
     )
   }
 }

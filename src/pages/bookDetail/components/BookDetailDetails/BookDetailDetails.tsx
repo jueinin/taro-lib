@@ -1,5 +1,5 @@
 import Taro, {Component} from '@tarojs/taro'
-import {Text, View} from "@tarojs/components";
+import { RichText, Text, View, WebView } from '@tarojs/components';
 import {BookDetailDetailsProps, BookDetailDetailsType} from "../../../../common/types";
 import {observable} from "mobx";
 import classNames from "classnames";
@@ -9,31 +9,32 @@ import {observer} from "@tarojs/mobx";
 class BookDetailDetails extends Component<BookDetailDetailsProps>{   // 书籍详情的详情图文部分
   static externalClasses = ['outer-class'];
   static defaultProps = {
-    details: "",
     publishInfo: {
-      title: "",
-      author: "",
-      ISBN: "",
-      publishTime: "",
-      publisher: ""
-    }
-  }
+      title: '',
+      ISBN: '',
+      author: '',
+      publishTime: '',
+      publisher: '',
+    },
+    details: ''
+  };
   @observable currentTab = BookDetailDetailsType.图书详情;
 
   render(): any {
-    let {publishInfo} = this.props;
-    let {title, ISBN, author, publisher, publishTime} = publishInfo;
+    let { title, ISBN, author, publisher, publishTime } = this.props.publishInfo;
     return <View>
       <View className={'top-bar'}>
-        <View onClick={()=>this.currentTab=BookDetailDetailsType.图书详情} className={classNames('left', {active: this.currentTab === BookDetailDetailsType.图书详情})}>
+        <View onClick={() => this.currentTab = BookDetailDetailsType.图书详情}
+              className={classNames('left', { active: this.currentTab === BookDetailDetailsType.图书详情 })}>
           <Text className={'inner'}>图书详情</Text></View>
-        <View onClick={()=>this.currentTab=BookDetailDetailsType.出版信息} className={classNames('right', {active: this.currentTab === BookDetailDetailsType.出版信息})}>
+        <View onClick={() => this.currentTab = BookDetailDetailsType.出版信息}
+              className={classNames('right', { active: this.currentTab === BookDetailDetailsType.出版信息 })}>
           <Text className={'inner'}>出版信息</Text></View>
       </View>
-      <View className={classNames('book-details',{hidden: this.currentTab !== BookDetailDetailsType.图书详情})}>
-        我展示后端传来的HTML串
+      <View className={classNames('book-details', { hidden: this.currentTab !== BookDetailDetailsType.图书详情 })}>
+        <RichText nodes={this.props.details}/>
       </View>
-      <View className={classNames('publish-details page',{hidden: this.currentTab !== BookDetailDetailsType.出版信息})}>
+      <View className={classNames('publish-details page', { hidden: this.currentTab !== BookDetailDetailsType.出版信息 })}>
         <View className={'item'}>
           <View className={'item-left'}>书名</View>
           <View className={'item-right'}>{title}</View>

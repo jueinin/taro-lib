@@ -6,8 +6,9 @@ import './searchDetail.scss';
 import SearchBar from "../../common/components/SearchBar/SearchBar";
 import {observer} from "@tarojs/mobx";
 import {observable, reaction} from "mobx";
-import {mockPrefix} from "../../common/constants";
+import { apiPrefix, mockPrefix } from '../../common/constants';
 import BookList from "../../common/components/BookList/BookList";
+import { wxRequest } from '../../common/utils';
 
 @observer
 class SearchDetail extends Component{
@@ -46,11 +47,14 @@ class SearchDetail extends Component{
     Taro.showLoading({
       title: '加载中'
     })
-    Taro.request<BookSearchType,any>({
-      url: `${mockPrefix}/bookSearch?keyword=${keyword}&sortType=${sortType}?page=${page}`
+    wxRequest<BookSearchType,any>({
+      url: `${apiPrefix}/bookSearch?keyword=${keyword}&sortType=${sortType}&page=${page}`
     }).then(callBack?callBack:(res) => {
       this.bookList = res.data.bookData;
       this.maxPage=res.data.maxPage
+      if (this.maxPage === 1) {
+        this.reachToMaxPage = true;
+      }
     }).finally(() => Taro.hideLoading());
   };
   onReachBottom(): void {
@@ -58,9 +62,10 @@ class SearchDetail extends Component{
       this.onRequestBookList(this.searchString, this.currentTab, this.currentPage, (res) => {
         this.bookList = this.bookList.concat(res.data.bookData)
         this.maxPage=res.data.maxPage
-        this.currentPage++
-        if (this.currentPage===res.data.maxPage){
+        if (this.currentPage === res.data.maxPage) {
           this.reachToMaxPage = true;
+        } else {
+          this.currentPage++
         }
       });
     }

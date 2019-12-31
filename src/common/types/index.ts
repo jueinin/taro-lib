@@ -136,8 +136,8 @@ export type PublishInfo = {    // 出版信息   阉割一部分好了先
   publishTime: number;
 }
 export type BookDetailDetailsProps = {
+  details: string;
   publishInfo: PublishInfo;
-  details: string;  // 不太清楚这个图书详情那么多的图啥的怎么存储的, 估计是HTML存的
 };
 export type BookDetailDetailsRes = BookDetailDetailsProps;
 export enum BookDetailDetailsType {

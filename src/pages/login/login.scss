@@ -1,0 +1,45 @@
+@import "../../common/style/custom";
+@import "../../common/style/varibles";
+.login-page {
+  .form {
+    margin-top: 60px;
+
+    .input-bar {
+      display: flex;
+      align-items: center;
+
+      .darken {
+        color: $gray-400;
+      }
+
+      .input-wrapper {
+        flex-grow: 1;
+
+        .input {
+          width: 90%;
+        }
+      }
+
+      .code {
+        // 验证码
+        width: 600px;
+        margin-left: 76px;
+
+        .at-input__input {
+          flex-grow: 1;
+        }
+      }
+    }
+
+    .submit {
+      margin-top: 40px;
+
+      .signup {
+
+      }
+    }
+    .to-signUp {
+      margin-top: 35px;
+    }
+  }
+}

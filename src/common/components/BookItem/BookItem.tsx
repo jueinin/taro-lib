@@ -25,7 +25,7 @@ class BookItem extends Component<BookItemProps> {
   render() {
     let {imgUrl,title,author,price, comments,goodComments,onClick} = this.props;
     return (
-      <View className={'book-item outer-class'} onClick={onClick}>
+      <View className={'book-item outer-class'} onClick={()=>onClick(this.props.bookId)}>
         <View className={'img'}>
           <Image src={imgUrl}/>
         </View>

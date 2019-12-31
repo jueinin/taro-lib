@@ -5,11 +5,11 @@ import './forum.scss';
 import { AtAvatar, AtGrid, AtTabs, AtTabsPane } from 'taro-ui';
 import { FollowItem, FollowItemRes, ForumTab, HotBooksRes } from '../../common/types';
 import { mockPrefix } from '../../common/constants';
-import useLoadMore from '../../common/hooks/useLoadMore';
+import  useLoadMore  from '../../common/hooks/useLoadMore';
 import useReachBottom = Taro.useReachBottom;
-import useMemo = Taro.useMemo;
 import useEffect = Taro.useEffect;
 import { Item } from 'taro-ui/@types/grid';
+import { wxRequest } from '../../common/utils';
 
 
 const tabList:any = [
@@ -23,7 +23,7 @@ const tabList:any = [
 const Forum = () => {
   const [currentTab, setCurrentTab] = useState(ForumTab.关注);
   const {data: followData=[],loadMore} = useLoadMore<any,FollowItemRes>(params => {
-    return Taro.request({
+    return wxRequest({
       url: `${mockPrefix}/followFlow?page=${params.page}`,
     });
   }, [currentTab], {});
@@ -35,7 +35,7 @@ const Forum = () => {
   const [currentHotBookTab, setCurrentHotBookTab] = useState(0);
   const [hotBooksRes, setHotBooksRes]  = useState<HotBooksRes>([]);
   useEffect(() => {
-    Taro.request({
+    wxRequest({
       url: `${mockPrefix}/hotBooks`,
     }).then(res => setHotBooksRes(res.data.data));
   }, []);

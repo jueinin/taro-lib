@@ -2,16 +2,22 @@
 @import "../../common/style/custom";
 .post-detail {
   @extend .page;
+  padding: 20px;
   .title {
     @extend .common-title;
     font-size: 40px;
   }
   .content {
     @extend .common-text;
+    margin-top: 25px;
   }
   .comment-bar {
     display: flex;
-    padding: 16px;
+    margin-top: 25px;
+    padding: 10px;
+    align-items: center;
+    color: #fff;
+    background: $gray-500;
     border-left: 2px solid red;
     box-sizing: border-box;
     &-left {

@@ -1,0 +1,63 @@
+@import "../../common/style/custom";
+@import "../../common/style/varibles";
+
+.me {
+  .avatar {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    background: $red;
+    .login {
+      margin-left: 30px;
+
+      .login-btn {
+        background: transparent;
+        padding: 0;
+        border: none;
+        line-height: normal;
+        white-space: pre;
+        color: white;
+        &::after {
+          border: none;
+        }
+      }
+      .logined {
+        color: white;
+      }
+    }
+  }
+  .nav {
+    background: rgb(253,107,29);
+    background: linear-gradient(90deg, rgba(253,107,29,1) 0%, rgba(253,41,52,1) 50%, rgba(252,176,69,1) 100%);
+    .nav-tab-1 {
+      display: flex;
+      padding-top: 15px;
+      justify-content: space-around;
+      flex-direction: row;
+      color: white;
+      .grid-icon .icon {
+        color: $gray-200;
+      }
+    }
+    .nav-tab-2 {
+      margin-top: 30px;
+      .card .at-card__content-info{
+        background: white;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        .grid-icon {
+          .title {
+            font-size: $font-size-sm;
+          }
+          .icon {
+            color: red;
+          }
+        }
+      }
+      .card .at-card__header {
+        padding: 0;
+      }
+    }
+  }
+}

@@ -5,12 +5,10 @@ import './index.scss'
 import SearchBar from "../../common/components/SearchBar/SearchBar";
 import { BookItemInfo, IndexState } from '../../common/types';
 import icon from '../../static/images/icons/icon.png';
-import img1 from '../../static/images/swiper/swiper-image1.jpg';
-import img2 from '../../static/images/swiper/swiper-image2.jpg';
-import img3 from '../../static/images/swiper/swiper-image3.jpg';
-import {mockPrefix} from "../../common/constants";
+import { apiPrefix, mockPrefix } from '../../common/constants';
 import ClassificationIcon from "../../common/components/ClassificationIcon/ClassificationIcon";
 import BookItem from '../../common/components/BookItem/BookItem';
+import { wxRequest } from '../../common/utils';
 class Index extends Component<any,IndexState> {
 
   /**
@@ -82,8 +80,8 @@ class Index extends Component<any,IndexState> {
     })
   };
   onRequest=()=>{
-    Taro.request({
-      url: `${mockPrefix}/recommends`,
+    wxRequest({
+      url: `${apiPrefix}/recommends`,
       success: res => {
         this.setState({
           books: this.state.books.concat(res.data),
@@ -106,13 +104,13 @@ class Index extends Component<any,IndexState> {
         <View className={'top-swiper'}>
           <Swiper className={'swiper'} indicatorDots autoplay indicatorColor={'#B0B0A8'}>
             <SwiperItem>
-              <Image src={img1} className={'swiper-item'} mode={'scaleToFill'}/>
+              <Image src={'https://jueinin.oss-cn-hongkong.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F/swiper-image1.jpg'} className={'swiper-item'} mode={'scaleToFill'}/>
             </SwiperItem>
             <SwiperItem>
-              <Image src={img2} className={'swiper-item'} mode={'scaleToFill'}/>
+              <Image src={'https://jueinin.oss-cn-hongkong.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F/swiper-image2.jpg'} className={'swiper-item'} mode={'scaleToFill'}/>
             </SwiperItem>
             <SwiperItem>
-              <Image src={img3} className={'swiper-item'} mode={'scaleToFill'}/>
+              <Image src={'https://jueinin.oss-cn-hongkong.aliyuncs.com/%E5%B0%8F%E7%A8%8B%E5%BA%8F/swiper-image3.jpg'} className={'swiper-item'} mode={'scaleToFill'}/>
             </SwiperItem>
           </Swiper>
         </View>

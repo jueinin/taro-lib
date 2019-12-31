@@ -5,6 +5,7 @@ import { toPercent } from '../../../../common/utils';
 import PromotionProductItem from "../../../../common/components/PromotionProductItem/PromotionProductItem";
 import './BookDetailItem.scss'
 import {observer} from "@tarojs/mobx";
+import previewImage = Taro.previewImage;
 @observer
 class BookDetailItem extends Component<BookDetailItemProps> {
   static defaultProps= {
@@ -28,6 +29,11 @@ class BookDetailItem extends Component<BookDetailItemProps> {
       url: `/pages/bookDetail/bookDetail?bookId=${bookId}`
     })
   };
+  onImagePreview = () => {
+    previewImage({
+      urls: this.props.images,
+    })
+  };
   render(): any {
     let { images, price, title, author, publisher, description, comment,AdGoods } = this.props;
     return (
@@ -43,7 +49,7 @@ class BookDetailItem extends Component<BookDetailItemProps> {
           >
             {images.map((image, index) => {
               return (
-                <SwiperItem key={index}>
+                <SwiperItem key={index} onClick={this.onImagePreview}>
                   <Image mode={"widthFix"} className={'swiper-img'} src={image} />
                 </SwiperItem>
               );
