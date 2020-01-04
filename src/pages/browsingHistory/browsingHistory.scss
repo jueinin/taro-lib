@@ -1,3 +1,45 @@
+@import "../../common/style/varibles";
+@import "../../common/style/custom";
 .browsingHistory {
+  .tip {
+    margin-bottom: 30px;
+  }
 
+  .time {
+    color: $gray-500;
+    font-size: $font-size-base*0.8;
+  }
+  .items {
+    display: flex;
+    flex-wrap: wrap;
+    .item {
+      flex-basis: 33.3%;
+      box-sizing: border-box;
+      padding: 8px;
+      .img {
+        width: 100%;
+      }
+      .title {
+        width: 100%;
+        @extend .van-multi-ellipsis--l2;
+        -webkit-line-clamp: 3;
+        font-size: $font-size-sm;
+      }
+      .bottom {
+        margin-top: 10px;
+        display: flex;
+        .price {
+          color: red;
+        }
+        .oper {
+          margin-left: auto;
+        }
+      }
+    }
+  }
+  .modal {
+    .icon {
+      margin-right: 8px;
+    }
+  }
 }

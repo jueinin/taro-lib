@@ -1,0 +1,16 @@
+.my-favorite {
+  .none {
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    .content {
+      text-align: center;
+      margin-top: auto;
+      margin-bottom: 50px;
+      .img {
+        width: 56PX;
+        height: 44PX;
+      }
+    }
+  }
+}

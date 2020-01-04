@@ -1,10 +1,6 @@
 @import "../../common/style/custom";
 
-.box {
-  position: relative;
-}
-.icon {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+.container {
+  display: inline-block;
+  margin-left: 400px;
 }

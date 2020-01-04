@@ -20,6 +20,7 @@ import useContext = Taro.useContext;
 import { StoreContext } from '../../app';
 import GridIcon from '../../common/components/GridIcon/GridIcon';
 
+
 const Me = () => {
   let userStore = useContext(StoreContext).userStore;
   let { isLogin, userInfo } = userStore;
@@ -38,26 +39,37 @@ const Me = () => {
       });
     }
   };
+  const authEvent = (callback) => {
+    console.log(isLogin, userInfo);
+    if (isLogin) {
+      callback();
+    } else {
+      navigateTo({
+        url: '/pages/login/login',
+      })
+    }
+  };
   const [nav1Items, setNav1Items] = useState([
     {
       icon: 'fa fa-paper-plane',
       title: '浏览历史',
       onClick: () => {
-        if (isLogin) {
+        authEvent(() => {
           navigateTo({
             url: '/pages/browsingHistory/browsingHistory',
           });
-        } else {
-          navigateTo({
-            url: '/pages/login/login',
-          })
-        }
+        });
       },
     },
     {
       icon: 'fa fa-star',
-      title: '收藏商品',
+      title: '我的收藏',
       onClick: () => {
+        authEvent(()=>{
+          navigateTo({
+            url: '/pages/myFavorite/myFavorite'
+          })
+        })
       },
     },
     {
@@ -99,6 +111,7 @@ const Me = () => {
       },
     },
   ]);
+  console.log(isLogin,userInfo);
   return <View className={'me'}>
     <View className={'avatar'}>
       <View><AtAvatar circle image={get(userInfo, 'avatarUrl', defaultAvatar)} size={'normal'}/></View>

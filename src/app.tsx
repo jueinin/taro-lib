@@ -47,6 +47,7 @@ class App extends Component {
       'pages/signUp/signUp',
       'pages/personalSetting/personalSetting',
       'pages/browsingHistory/browsingHistory',
+      'pages/myFavorite/myFavorite',
       'pages/test/test',
     ],
     window: {
@@ -94,6 +95,9 @@ class App extends Component {
           }).then(value => {
             setStorageSync('sessionId', value.data.token);
           });
+        },
+        fail: err => {
+          console.error(err,'登录失败')
         }
       })
     }
