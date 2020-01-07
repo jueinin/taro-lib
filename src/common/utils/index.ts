@@ -78,3 +78,4 @@ export const wxRequest = <T = any, U = any>(config: request.Param<U>): request.r
     ...config,
   });
 };
+

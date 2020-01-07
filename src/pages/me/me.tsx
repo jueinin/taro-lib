@@ -19,6 +19,7 @@ import { observer } from '@tarojs/mobx';
 import useContext = Taro.useContext;
 import { StoreContext } from '../../app';
 import GridIcon from '../../common/components/GridIcon/GridIcon';
+import login = Taro.login;
 
 
 const Me = () => {
@@ -34,9 +35,13 @@ const Me = () => {
       });
     } else {
       userStore.setUserInfo(detail.userInfo);
-      wxRequest({  // 去创建一个账号
-        url: `${apiPrefix}/login`,
-      });
+      login({
+        success: res => {
+          wxRequest({ // 请求给session加个user
+            url: `${apiPrefix}/wechatLogin?code=${res.code}`,
+          });
+        }
+      })
     }
   };
   const authEvent = (callback) => {

@@ -14,6 +14,7 @@ import getSetting = Taro.getSetting;
 import { get } from 'lodash';
 import getUserInfo = Taro.getUserInfo;
 import { UserStore } from './store/userStore';
+import { wxRequest } from './common/utils';
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
@@ -83,23 +84,17 @@ class App extends Component {
       ]
     }
   }
-
+  requestToGetSession = () => {
+    wxRequest({
+      url: `${apiPrefix}/getSessionId`,
+    }).then(res=>{
+      setStorageSync('sessionId', res.data.sessionId);
+    })
+  };
   componentDidMount () {  // 首次打开没有token的时候拿一个token，后面所有需要session的接口都要加个header auth去把token带上
     let sessionId = getStorageSync('sessionId');
     if (!sessionId) {
-      // 先拿到code再从服务端用jwt拿到sessionId
-      login({
-        success: res =>{
-          request({
-            url: `${apiPrefix}/auth?code=${res.code}`,
-          }).then(value => {
-            setStorageSync('sessionId', value.data.token);
-          });
-        },
-        fail: err => {
-          console.error(err,'登录失败')
-        }
-      })
+      this.requestToGetSession();
     }
     // 有权限就拿一下userInfo，没有拉倒
     getSetting({
