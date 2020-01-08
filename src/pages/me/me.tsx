@@ -39,6 +39,8 @@ const Me = () => {
         success: res => {
           wxRequest({ // 请求给session加个user
             url: `${apiPrefix}/wechatLogin?code=${res.code}`,
+          }).then(res=>{
+            userStore.getUserData();
           });
         }
       })

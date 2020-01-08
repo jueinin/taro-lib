@@ -3,12 +3,19 @@ import { OnGetUserInfoEventDetail } from '@tarojs/components/types/Button';
 import { wxRequest } from '../common/utils';
 import { apiPrefix } from '../common/constants';
 
+export type UserData = {
+
+}
+
 export class UserStore {
 
   @observable userInfo: OnGetUserInfoEventDetail['userInfo'] = null;
+
   @computed get isLogin() {
-    return !!this.userInfo;
+    return !!this.userData;
   }
+
+  @observable userData: any = null;
 
   @action
   setUserInfo = (userInfo: OnGetUserInfoEventDetail['userInfo']) => {
@@ -17,7 +24,10 @@ export class UserStore {
   @action
   getUserData = () => {
     wxRequest({
-      url: `${apiPrefix}/userData`
-    })
+      url: `${apiPrefix}/userData`,
+    }).then(res => {
+      this.userData = res.data;
+    });
   };
 }
+

@@ -95,7 +95,9 @@ class App extends Component {
     let sessionId = getStorageSync('sessionId');
     if (!sessionId) {
       this.requestToGetSession();
+      return;
     }
+    store.userStore.getUserData();
     // 有权限就拿一下userInfo，没有拉倒
     getSetting({
       success: (res)=>{
