@@ -89,10 +89,12 @@ class BookDetail extends Component {
           title: '添加收藏成功',
           duration: 3000,
         });
+        this.productInfo.isFavorited = true;
       })
       .finally(() => {
         hideLoading();
-        this.onRequestProductInfo(this.bookId);
+        // this.onRequestProductInfo(this.bookId);
+
       });
   };
   onRemoveFavo = () => {
@@ -104,10 +106,10 @@ class BookDetail extends Component {
           icon: 'none',
           duration: 3000,
         });
+        this.productInfo.isFavorited = false;
       })
       .finally(() => {
         hideLoading();
-        this.onRequestProductInfo(this.bookId);
       });
   };
   componentDidMount(): void {

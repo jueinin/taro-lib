@@ -23,6 +23,7 @@ export class UserStore {
   @observable userInfo: OnGetUserInfoEventDetail['userInfo'] = null;
 
   @computed get isLogin() {
+    console.log('is login', !!this.userData);
     return !!this.userData;
   }
 
@@ -37,7 +38,9 @@ export class UserStore {
     wxRequest({
       url: `${apiPrefix}/userData`,
     }).then(res => {
-      this.userData = res.data;
+      if (!res.data.message) {
+        this.userData = res.data;
+      }
     });
   };
 
