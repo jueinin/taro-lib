@@ -24,6 +24,7 @@
         @extend .van-multi-ellipsis--l2;
         -webkit-line-clamp: 3;
         font-size: $font-size-sm;
+        min-height: 57px;
       }
       .bottom {
         margin-top: 10px;

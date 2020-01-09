@@ -9,7 +9,6 @@ class Follow extends Component<FollowProps>{
     data: [],
   }
   render() {
-    console.log(this.props);
     return (
       <ScrollView className={'follow'}>
         {this.props.data.map((value) => {

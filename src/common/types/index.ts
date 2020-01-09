@@ -100,7 +100,7 @@ export type CommentPreview = {
     id: string;
   }[]
 }
-export type BookDetailItemProps = ProductInfoRes
+export type BookDetailItemProps = Omit<ProductInfoRes, 'isFavorited'>;
 export type ProductInfoRes = {  // 目前是一样的, 后续上面的估计会加props,所以拆开了
   images: string[],
   price: number;
@@ -109,6 +109,7 @@ export type ProductInfoRes = {  // 目前是一样的, 后续上面的估计会�
   author: string;
   publisher: string;
   AdGoods: BookItemInfo[];
+  isFavorited: boolean;
   comment: CommentPreview;
 }
 

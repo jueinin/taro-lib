@@ -47,7 +47,6 @@ const Me = () => {
     }
   };
   const authEvent = (callback) => {
-    console.log(isLogin, userInfo);
     if (isLogin) {
       callback();
     } else {
@@ -84,6 +83,15 @@ const Me = () => {
       title: '论坛消息',
       onClick: ()=>{}
     },
+    {
+      icon: 'fa fa-cart',
+      title: "购物车",
+      onClick: () => {
+        navigateTo({
+          url: `/pages/shoppingCart/shoppingCart`
+        })
+      },
+    }
   ]);
   const [nav2Items, setNav2Items] = useState([
     {
@@ -118,7 +126,6 @@ const Me = () => {
       },
     },
   ]);
-  console.log(isLogin,userInfo);
   return <View className={'me'}>
     <View className={'avatar'}>
       <View><AtAvatar circle image={get(userInfo, 'avatarUrl', defaultAvatar)} size={'normal'}/></View>

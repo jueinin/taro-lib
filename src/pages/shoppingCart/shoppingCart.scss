@@ -1,0 +1,51 @@
+@import "../../common/style/varibles";
+@import "../../common/style/custom";
+.shopping-cart-page {
+  @extend .page;
+  .nav {
+    display: flex;
+    .editing,.manage {
+      margin-left: auto;
+    }
+  }
+  .list {
+    margin-top: 20px;
+    .cart-item {
+      display: flex;
+      .checkbox {
+        flex-basis: 20%;
+      }
+      .content {
+        display: flex;
+        .img {
+          width: 200px;
+          height: 200px;
+        }
+        .detail {
+          display: flex;
+          flex-direction: column;
+          .title {
+            @extend .sub-text;
+
+          }
+          .tips {
+            color: hsla(28, 80%, 48%, 0.98);
+          }
+          .bottom {
+            display: flex;
+            justify-content: space-between;
+            .price {
+              font-weight: bold;
+              color: red;
+            }
+            .counter {
+
+            }
+          }
+        }
+      }
+
+
+    }
+  }
+}

@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro';
 import './browsingHistory.scss'
 import { View, Image,Text } from '@tarojs/components';
 import { useAsync, useToggle } from '../../common/hooks';
-import { wxRequest } from '../../common/utils';
+import { addToFavorite, removeFromFavorite, wxRequest } from '../../common/utils';
 import { apiPrefix } from '../../common/constants';
 import useEffect = Taro.useEffect;
 import useState = Taro.useState;
@@ -12,6 +12,7 @@ import hideLoading = Taro.hideLoading;
 import { AtActionSheet,AtActionSheetItem } from 'taro-ui';
 import GridIcon from '../../common/components/GridIcon/GridIcon';
 import showToast = Taro.showToast;
+import navigateTo = Taro.navigateTo;
 interface Item {
   id: number;
   bookId: number;
@@ -47,13 +48,7 @@ const BrowsingHistory = () => {
     setModalOpen(true)
   };
   const onAddToFavorite = () => {
-    wxRequest({
-      method: 'POST',
-      url: `${apiPrefix}/addToFavorite`,
-      data: {
-        bookId: currentItem.bookId
-      }
-    }).then(res=>{
+    addToFavorite(currentItem.bookId).then(res=>{
       if (res.data.status === 'ok') {
         showToast({
           title: '添加成功',
@@ -64,14 +59,8 @@ const BrowsingHistory = () => {
       }
     })
   };
-  const removeFromFavorite = () => {
-    wxRequest({
-      method:'POST',
-      url: `${apiPrefix}/removeFromFavorite`,
-      data: {
-        id: currentItem.bookId
-      }
-    }).then(res=>{
+  const onRemoveFromFavorite = () => {
+    removeFromFavorite(currentItem.bookId).then(res=>{
       if (res.data.status === 'ok') {
         showToast({
           title: '取消收藏成功',
@@ -100,6 +89,11 @@ const BrowsingHistory = () => {
       }
     })
   };
+  const toBookDetailPage = (bookId: number) => {
+    navigateTo({
+      url: `/pages/bookDetail/bookDetail?bookId=${bookId}`,
+    });
+  };
   return <View className={'browsingHistory page'}>
     <View className={'tip'}>浏览历史:</View>
     {data.map(value=>{
@@ -107,7 +101,7 @@ const BrowsingHistory = () => {
         <View className={'time'}>{value.time}:</View>
         <View className={'items'}>
           {value.items.map(item=>{
-            return <View key={item.id} className={'item'}>
+            return <View key={item.id} className={'item'} onClick={()=>toBookDetailPage(item.bookId)}>
               <Image mode={'widthFix'} className={'img'} src={item.image}/>
               <View className={'title'}>{item.title}</View>
               <View className={'bottom'}>
@@ -122,7 +116,7 @@ const BrowsingHistory = () => {
         <AtActionSheet isOpened={modalOpen} className={'modal'} onClose={()=>setModalOpen(false)}>
           <View>
             <AtActionSheetItem>
-              <View onClick={get(currentItem,'isFavorite',false)?removeFromFavorite:onAddToFavorite}>
+              <View onClick={get(currentItem,'isFavorite',false)?onRemoveFromFavorite:onAddToFavorite}>
                 <View className={'at-icon at-icon-star fa-lg icon'}/>
                 <Text>{get(currentItem,'isFavorite',false)?"取消收藏":"收藏"}</Text>
               </View>

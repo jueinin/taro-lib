@@ -3,6 +3,7 @@ import { BookItemInfo, BookItemProps } from '../types';
 import Taro,{request} from '@tarojs/taro';
 import getStorageSync = Taro.getStorageSync;
 import IRequestParam = Taro.cloud.WXNS.IRequestParam;
+import { apiPrefix } from '../constants';
 
 /**
  *  计算百分比
@@ -79,3 +80,26 @@ export const wxRequest = <T = any, U = any>(config: request.Param<U>): request.r
   });
 };
 
+export const removeFromFavorite = (bookId: number) => {
+  return wxRequest({
+    method: 'POST',
+    url: `${apiPrefix}/removeFromFavorite`,
+    data: {
+      id: bookId,
+    },
+  });
+};
+
+export const addToFavorite = (bookId: number) => {
+  return wxRequest({
+    method: 'POST',
+    url: `${apiPrefix}/addToFavorite`,
+    data: {
+      bookId: bookId,
+    },
+  });
+};
+
+export const isValidResponse = (response: any) => {
+  return response && response.status === 'ok';
+};

@@ -11,7 +11,6 @@ interface GridIconProps {
   onClick?: any
 }
 const GridIcon = (props:GridIconProps) => {
-
   return <View className={'body outer-class'} onClick={props.onClick}>
     {props.icon.type==='icon'?<View className={'icon '+props.icon.value}/>:<Image src={props.icon.value} className={'icon img-class'}/>}
     <View className={'title'}>{props.title}</View>
