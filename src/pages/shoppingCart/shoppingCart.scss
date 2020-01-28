@@ -10,26 +10,39 @@
   }
   .list {
     margin-top: 20px;
+    margin-bottom: 110px;
     .cart-item {
       display: flex;
+      margin-top: 10px;
+      padding: 10px;
+      border-bottom: 1px solid $gray-300;
       .checkbox {
         flex-basis: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        //border: 1px solid $gray-300;
       }
       .content {
         display: flex;
         .img {
           width: 200px;
           height: 200px;
+          image {
+            width: 100%;
+            height: 100%;
+          }
         }
         .detail {
           display: flex;
           flex-direction: column;
           .title {
-            @extend .sub-text;
-
+            font-size: 0.92rem;
+            color: #000;
           }
           .tips {
             color: hsla(28, 80%, 48%, 0.98);
+            min-height: 40px;
           }
           .bottom {
             display: flex;
@@ -46,6 +59,40 @@
       }
 
 
+    }
+  }
+  .bottom-bar {
+    position: fixed;
+    height: 100px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border: 1px solid $gray-300;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    .select-all {
+      margin-left: 40px;
+      display: flex;
+    }
+    .settlement {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 20px;
+      .price {
+        font-size: $font-size-sm;
+        color: red;
+        margin-right: 25px;
+      }
+      .settle-btn {
+        background: rgb(253,107,29);
+        background: linear-gradient(180deg, rgba(253,107,29,1) 0%, rgba(253,41,52,1) 50%, rgba(252,145,69,1) 100%);
+        border-radius: 56px;
+        padding-left: 70px;
+        padding-right: 70px;
+        color: white;
+      }
     }
   }
 }

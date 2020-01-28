@@ -96,6 +96,7 @@ class App extends Component {
   };
   componentDidMount () {  // 首次打开没有token的时候拿一个token，后面所有需要session的接口都要加个header auth去把token带上
     let sessionId = getStorageSync('sessionId');
+    console.log(sessionId,'sessionId')
     if (!sessionId) {
       this.requestToGetSession();
       return;

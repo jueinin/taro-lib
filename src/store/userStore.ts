@@ -9,6 +9,7 @@ export type ShoppingCartItem = {
   price: number;
   count: number;
   smallImage: string;
+  checked?: boolean;
 }
 export type UserData = {
   shoppingCart: {
